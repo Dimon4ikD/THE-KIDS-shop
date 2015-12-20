@@ -1,8 +1,8 @@
 ru:
   app:
-    name: Базовое приложение
+    name: Магазин детских товаров
     company:
-      short_name: НИЯУ МИФИ
+      short_name: ДМ
       department: УИМООП
   helpers:
     submit:
