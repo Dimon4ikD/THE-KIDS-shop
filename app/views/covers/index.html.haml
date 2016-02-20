@@ -1,0 +1,25 @@
+%h1 Listing covers
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Image
+      %th Description
+      %th
+      %th
+      %th
+
+  %tbody
+    - @covers.each do |cover|
+      %tr
+        %td= cover.name
+        %td= cover.image
+        %td= cover.description
+        %td= link_to 'Show', cover
+        %td= link_to 'Edit', edit_cover_path(cover)
+        %td= link_to 'Destroy', cover, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Cover', new_cover_path

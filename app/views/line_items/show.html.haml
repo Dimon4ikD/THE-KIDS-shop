@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Product:
+  = @line_item.Product
+%p
+  %b Price:
+  = @line_item.price
+%p
+  %b Quantity:
+  = @line_item.quantity
+
+= link_to 'Edit', edit_line_item_path(@line_item)
+\|
+= link_to 'Back', line_items_path

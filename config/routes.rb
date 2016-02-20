@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :sections
+  resources :catalogs
+  resources :covers
+  resources :products
+  resources :line_items
+  resources :product_orders
+  resources :users
+  resources :roles
   resources :password_resets
 
   get 'welcome/index', as: :welcome

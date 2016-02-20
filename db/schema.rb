@@ -11,10 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204090520) do
+ActiveRecord::Schema.define(version: 20160219213737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "catalogs", force: :cascade do |t|
+    t.string   "name"
+    t.string   "HyTML"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "catalogs_catalogs", id: false, force: :cascade do |t|
+    t.integer "catalog_id", null: false
+  end
+
+  create_table "covers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.text     "description"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -31,6 +54,59 @@ ActiveRecord::Schema.define(version: 20151204090520) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer  "product_id"
+    t.decimal  "price",      precision: 15, scale: 2
+    t.integer  "quantity"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
+
+  create_table "product_orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.integer  "line_item_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "product_orders", ["line_item_id"], name: "index_product_orders_on_line_item_id", using: :btree
+  add_index "product_orders", ["product_id"], name: "index_product_orders_on_product_id", using: :btree
+  add_index "product_orders", ["user_id"], name: "index_product_orders_on_user_id", using: :btree
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "amount"
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
+    t.integer  "price"
+    t.integer  "catalog_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "products", ["catalog_id"], name: "index_products_on_catalog_id", using: :btree
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.integer  "catalog_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "sections", ["catalog_id"], name: "index_sections_on_catalog_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                                       null: false
@@ -73,4 +149,9 @@ ActiveRecord::Schema.define(version: 20151204090520) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "line_items", "products"
+  add_foreign_key "product_orders", "line_items"
+  add_foreign_key "product_orders", "products"
+  add_foreign_key "product_orders", "users"
+  add_foreign_key "sections", "catalogs"
 end

@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @cover.name
+%p
+  %b Image:
+  = @cover.image
+%p
+  %b Description:
+  = @cover.description
+
+= link_to 'Edit', edit_cover_path(@cover)
+\|
+= link_to 'Back', covers_path
