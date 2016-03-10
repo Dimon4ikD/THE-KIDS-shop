@@ -44,6 +44,9 @@ gem 'paperclip'
 gem 'delayed_job_active_record'
 gem 'sorcery'
 
+gem 'axlsx'
+gem 'axlsx_rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

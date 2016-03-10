@@ -1,29 +1,184 @@
-%h1 Listing products
+-#%h1 Listing products
+-#
+-#%table
+-#  %thead
+-#    %tr
+-#      %th Name
+-#      %th Amount
+-#      %th Cover
+-#      %th Price
+-#      %th Catalog
+-#      %th
+-#      %th
+-#      %th
+-#
+-#  %tbody
+-#    - @products.each do |product|
+-#      %tr
+-#        %td= product.name
+-#        %td= product.amount
+-#        %td= product.cover
+-#        %td= product.price
+-#        %td= product.Catalog
+-#        %td= link_to 'Show', product
+-#        %td= link_to 'Edit', edit_product_path(product)
+-#        %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
+-#
+-#%br
+-#
+-#= link_to 'New Product', new_product_path
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th Amount
-      %th Cover
-      %th Price
-      %th Catalog
-      %th
-      %th
-      %th
 
-  %tbody
-    - @products.each do |product|
-      %tr
-        %td= product.name
-        %td= product.amount
-        %td= product.cover
-        %td= product.price
-        %td= product.Catalog
-        %td= link_to 'Show', product
-        %td= link_to 'Edit', edit_product_path(product)
-        %td= link_to 'Destroy', product, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
-%br
 
-= link_to 'New Product', new_product_path
+
+
+-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#
+
+-#%p#notice= notice
+-#%h1 Книги
+-#%table
+-#  %thead
+-#    %tr
+-#      %th Название
+-#      %th Количество
+-#      %th Дата создания
+-#      %th Автор
+-#      %th Количество страниц
+-#      %th Isbn
+-#      %th Udc
+-#      %th Lbc
+-#      %th Цена
+-#      %th{:colspan => "3"}
+-#  %tbody
+-#    - @books.each do |book|
+-#      %tr
+-#        %td= book.name
+-#        %td= book.amount
+-#        %td= book.year
+-#        %td= book.author
+-#        %td= book.pages_amount
+-#        %td= book.isbn
+-#        %td= book.udc
+-#        %td= book.lbc
+-#        %td= book.price
+-#        %td= link_to 'Показать', book
+-#        %td= link_to 'Изменить', edit_book_path(book)
+-#        %td= link_to 'Удалить', book, method: :delete, data: { confirm: 'Are you sure?' }
+-#%br/
+-#= link_to 'Новая Книга', new_book_path
+-#= link_to 'В корзину', line_items_path(book_exemplar_id: book_exemplar.id), data:{method: :post, remote: :true}, class:"btn btn-danger glyphicon glyphicon-plus"
+-#-if @book.image?
+-#  =link_to @book.image.url do
+-#    =image_tag @book.image.url(:thumb)
+-#=image_tag @film.cover.url(:medium), alt: @film.name, class: 'img-responsive'
+
+.page-header
+  %h1 Товары
+.container
+  -@products.each do |prod|
+    -#.col-md-3
+    -#  .list-group
+    -#    .list-group-item
+    -#
+    -#      .book
+    -#      -if !bookd.image.blank?
+    -#        = image_tag bookd.image.url(:medium), alt: bookd.name, class: 'img-responsive'
+    .col-md-4
+      .list-group
+        .list-group-item
+          -if !prod.image.blank?
+            = link_to prod, class: "form-group" do
+              =image_tag prod.image.url(:medium), height:"265", style: "display: block; margin: 0px auto;", alt: prod.name, class: "thumb"
+          -else
+            = link_to prod, class: "form-group" do
+              =image_tag ("blank.png"),src: root_path, height:"265", style: "display: block; margin: 0px auto;"#, data: {toggle: "collapse", target:"#menu"}
+        .list-group-item
+          %h4
+            = link_to "#{prod.name}", prod, style: "color: black"
+
+        .list-group-item
+          Автор
+          .badge
+            =prod.author.name
+        .list-group-item
+          Жанр
+          .badge
+            =prod.genre.name
+        .list-group-item
+          Цена:
+          .badge
+          -if prod.price < 2000
+            .badge.price
+              =number_to_currency(prod.price)
+          -else
+            .badge
+              =number_to_currency(prod.price)
+
+        .list-group-item
+          .row.text-center
+            .col-xs-3.pull-left
+              .button= link_to '', line_items_path(book_id: prod.id), data:{method: :post, remote: :true}, class:"btn btn-success btn-lg fa fa-cart-plus", title: "Добавить в корзину"
+            -if @current_user.try(:admin?)
+              .col-xs-3
+                .button= link_to '', prod, class: "btn btn-info btn-lg fa fa-eye", title: "Показать"
+            -if @current_user.nil? or !@current_user.nil? and  !@current_user.try(:admin?)
+              .col-xs-3.pull-right
+                .button= link_to '', prod, class: "btn btn-info btn-lg fa fa-eye", title: "Показать"
+            -if @current_user.try(:admin?)
+              .col-xs-3.col-md-3
+                .button= link_to '', edit_book_path(prod), class: "btn btn-warning btn-lg fa fa-pencil", title:"Редактировать"
+              .col-xs-3.pull-right
+                .button= link_to '', prod, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-danger btn-lg  fa fa-trash", title: "Удалить"
+
+          -#%table
+          -#  %tr
+          -#    .button-group-gorisontal
+          -#      %td
+          -#        .button= link_to '', line_items_path(book_id: prod.id), data:{method: :post, remote: :true}, class:"btn btn-success glyphicon glyphicon-plus", title: "Добавить в корзину"
+          -#      %td
+          -#        .button= link_to '', prod, class: "btn btn-info glyphicon glyphicon-search", title: "Показать"
+          -#      %td
+          -#        .button= link_to '', edit_book_path(prod), class: "btn btn-warning glyphicon glyphicon-pencil", title:"Редактировать"
+          -#      %td
+          -#        .button= link_to '', prod, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-danger glyphicon glyphicon-trash", title: "Удалить"
+        -if @current_user.try(:admin?)
+  .br
+  = link_to ' Новая Книга', new_book_path, class: "btn btn-primary fa fa-plus"
+
+.br
+= paginate @products
+
+
+-#
+-#
+-#      .list-group-item
+-#        .row.text-center
+-#          .col-xs-3.pull-left
+-#            .button= link_to '', line_items_path(book_id: bookd.id), data:{method: :post, remote: :true}, class:"btn btn-success glyphicon glyphicon-plus", title: "Добавить в корзину"
+-#      -if !@current_user.nil?
+-#        -if @current_user.admin?
+-#          -#%div{class: "col-xs-#{@current_user.admin? ? 3 : 6}"}
+-#          %div{class: "col-xs-#{@current_user.admin? ? 3 : 6}"}
+-#            .button= link_to '', bookd, class: "btn btn-info glyphicon glyphicon-search", title: "Показать"
+-#          -if !@current_user.nil?
+-#            -if @current_user.admin?
+-#              .col-xs-3.col-md-3
+-#                .button= link_to '', edit_book_path(bookd), class: "btn btn-warning glyphicon glyphicon-pencil", title:"Редактировать"
+-#          .col-xs-3.pull-right
+-#            .button= link_to '', bookd, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-danger glyphicon glyphicon-trash", title: "Удалить"
+-#
+-#
+-#
+-#.list-group-item
+-#  .row.text-center
+-#    .col-xs-3.pull-left
+-#      .button= link_to '', line_items_path(book_id: bookd.id), data:{method: :post, remote: :true}, class:"btn btn-success glyphicon glyphicon-plus", title: "Добавить в корзину"
+-#    %div{class: "col-xs-#{@current_user.admin? ? 3 : 6}"}
+-#      .button= link_to '', bookd, class: "btn btn-info glyphicon glyphicon-search", title: "Показать"
+-#    -if @current_user.admin?
+-#      .col-xs-3.col-md-3
+-#        .button= link_to '', edit_book_path(bookd), class: "btn btn-warning glyphicon glyphicon-pencil", title:"Редактировать"
+-#    .col-xs-3.pull-right
+-#      .button= link_to '', bookd, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-danger glyphicon glyphicon-trash", title: "Удалить"
+

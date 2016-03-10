@@ -1,0 +1,4 @@
+class DabaseController < ApplicationController
+
+
+end

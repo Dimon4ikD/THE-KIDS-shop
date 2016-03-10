@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :password_resets
 
   get 'welcome/index', as: :welcome
+  get 'dabase/dabase', as: :dabase
   get 'login' => 'welcome#new', :as => :login
   get 'logout' => 'welcome#destroy', :as => :logout
   post 'try_login' => 'welcome#create', :as => :try_login
