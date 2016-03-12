@@ -7,6 +7,15 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def save
+    @products = Product.all
+    respond_to do |format|
+      format.xlsx do
+        response.headers['Content-Disposition'] = 'attachment; filename="my_new_filename.xlsx"'
+      end
+    end
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show
@@ -69,6 +78,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :amount, :cover, :price, :Catalog_id)
+      params.require(:product).permit(:name, :amount, :cover_id, :price, :Catalog_id)
     end
 end

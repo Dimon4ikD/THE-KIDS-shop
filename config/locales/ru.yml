@@ -2,13 +2,13 @@ ru:
   app:
     name: impex-med
     company:
-      short_name: ДМ
-      department: УИМООП
+      short_name: ИМ
+      department: Магазин
   helpers:
     submit:
-      create: Сохранить
-      submit: Сохранить
-      update: Сохранить
+      create: Создать
+      submit: Отправить
+      update: Обновить
 
   views:
     pagination:
@@ -22,7 +22,10 @@ ru:
       user: Пользователь
     attributes:
       user:
-        email: Пользовательское имя/электронная почта
+        email: Электронная почта
+        name: Имя
+        password: Пароль
+        password_confirmation: Подтверждение пароля
     errors:
       models:
         person:

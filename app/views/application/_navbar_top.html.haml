@@ -12,10 +12,20 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
+
+
     %ul.nav.navbar-nav.navbar-right.collapse.navbar-collapse#bs-example-navbar-collapse-1
+      %li= link_to "Все товары", products_path
+      %li= link_to "Корзина", line_items_path
       %li
-        = link_to login_path do
-          = @current_user.blank? ? 'войти' : @current_user.email
+      %li
+        - if @current_user.blank?
+          = link_to login_path do
+            = fa_icon 'sign-in' 'войти'
+        - else
+          = link_to @current_user do
+            = fa_icon 'user'
+            = t(@current_user.name)
       %li
         - if @current_user.blank?
           = link_to login_path do
@@ -23,3 +33,5 @@
         - else
           = link_to logout_path do
             = fa_icon 'sign-out'
+
+

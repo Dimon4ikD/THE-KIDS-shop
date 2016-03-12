@@ -22,6 +22,13 @@
           = f.label :password_confirmation
           = f.password_field :password_confirmation, class: 'form-control'
           = f.error_messages_for(:password_confirmation)
-  .form-actions
-    = f.submit nil, class: 'btn btn-primary'
 
+
+
+    .field
+    =f.label "Role"
+    %br/
+    =f.select :role_id, Role.ordering.map{|c| [c.name,c.id]},{}, class: 'form-control'
+  .form-actions
+    -#= f.submit nil, class: 'btn btn-primary'
+    = f.submit nil, class: 'btn btn-primary '

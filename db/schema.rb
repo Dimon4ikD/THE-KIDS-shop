@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20160219213737) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
+    t.integer  "number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -112,7 +113,7 @@ ActiveRecord::Schema.define(version: 20160219213737) do
     t.string   "email",                                       null: false
     t.string   "crypted_password"
     t.string   "salt"
-    t.integer  "role"
+    t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_me_token"
@@ -158,4 +159,5 @@ ActiveRecord::Schema.define(version: 20160219213737) do
   add_foreign_key "product_orders", "products"
   add_foreign_key "product_orders", "users"
   add_foreign_key "sections", "catalogs"
+  add_foreign_key "users", "roles"
 end

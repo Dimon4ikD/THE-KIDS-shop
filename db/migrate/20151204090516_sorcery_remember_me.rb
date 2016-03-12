@@ -10,5 +10,6 @@ class SorceryRememberMe < ActiveRecord::Migration
     # add_column :users, :role, :references, :foreign_key => true
 
     add_index :users, :remember_me_token
+    add_foreign_key :users, :roles
   end
 end

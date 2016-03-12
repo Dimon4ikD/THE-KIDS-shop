@@ -16,10 +16,27 @@
         %td= catalog.name
         %td= catalog.HyTML
         %td= catalog.description
-        %td= link_to 'Show', catalog
-        %td= link_to 'Edit', edit_catalog_path(catalog)
+        %td= link_to 'Show ', catalog
+        %td= link_to 'Edit ', edit_catalog_path(catalog)
         %td= link_to 'Destroy', catalog, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+
+
+
+
+  -#
+  -#.panel-heading
+  -#  %h3.panel-title Editor
+  -#  .panel-body
+  -#    #editor
+
 
 %br
 
 = link_to 'New Catalog', new_catalog_path
+-#
+-##editor some text
+-#%script{:charset => "utf-8", :src => "src/ace.js", :type => "text/javascript"}
+-#:javascript
+-#  var editor = ace.edit("editor")
+

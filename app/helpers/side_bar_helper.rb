@@ -2,7 +2,7 @@ module SideBarHelper
   def side_bar_items(ru)
     result = []
     result << {
-      :name => 'Разделы',
+      :name => 'Главная',
       :icon => 'list',
       :controller => :welcome, 
       :action => :index
@@ -18,8 +18,11 @@ module SideBarHelper
       {:name => 'Добавление',
        :controller => :users, :action => :new,
        :icon => 'user-plus'},
+      {:name => 'Наполнение',
+       :controller => :catalogs, :action => :index,
+       :icon => 'file-text-o'},
       {:name => 'База данных',
-       :controller => :welcome,
+       :controller => :dabase, :action => :dabase,
        :icon => 'database'}
 
     ]}

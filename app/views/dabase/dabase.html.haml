@@ -1,0 +1,65 @@
+.page-header
+  %h1 База данных
+
+-#
+-#= form_for @product do |f|
+-#  .row
+-#    .col-md-4
+-#      .form-group
+-#        .actions=f.submit 'Сохранить', class: "btn btn-primary"
+-#
+-#
+-#= form_for @product do
+-#  %p
+-#  %br
+-#  = link_to ' Сохранить базу', :action => :save, :format => :xlsx, class: "btn btn-primary fa fa-plus"
+-#
+
+
+-#
+-#.container
+-#  = form_for @product do |prod|
+-#    .row
+-#      .col-md-4
+-#        %p
+-#        .actions=prod.save 'Сохранить', class: "btn btn-primary"
+
+
+
+-#
+-#= form_for @product do |f|
+-#  - if @product.errors.any?
+-#    #error_explanation
+-#      %h2= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
+-#      %ul
+-#        - @product.errors.full_messages.each do |msg|
+-#          %li= msg
+-#
+-#  .field
+-#    = f.label :name
+-#    = f.text_field :name
+-#  .field
+-#    = f.label :amount
+-#    = f.number_field :amount
+-#  .field
+-#    = f.label :cover
+-#    = f.text_field :cover
+-#  .field
+-#    = f.label :price
+-#    = f.number_field :price
+-#  .field
+-#    = f.label :Catalog
+-#    = f.text_field :Catalog
+-#  .actions
+-#    = f.submit 'Save'
+-#=form_tag login_path do
+-#  .form-group
+-#    =label_tag :email, User.human_attribute_name(:email)
+-#    =email_field_tag :email,nil,class:"form-control",required: true
+-#  .form-group
+-#    =label_tag :password, User.human_attribute_name(:password)
+-#    =password_field_tag :password,nil,class:"form-control",required: true
+-#  %p
+-#    .actions=submit_tag "Войти", class:"btn btn-primary"
+
+

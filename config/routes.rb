@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   resources :sections
   resources :catalogs
   resources :covers
-  resources :products
+  resources :products do
+    collection do
+      get :save
+    end
+  end
   resources :line_items
   resources :product_orders
   resources :users

@@ -7,6 +7,11 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
+    # @current_user.try.admin?
+    if !@current_user.try(:is_admin?)
+      redirect_to new_user_path, notice:"Вы не админинстратор"
+    end
+    # @users = User.ordering.page(params[:page])
   end
 
   # GET /users/1
@@ -81,6 +86,6 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation, :name,
-        :activation_state, :activation_token, :activation_token_expires_at)
+        :activation_state, :activation_token, :activation_token_expires_at, :role_id)
     end
 end
