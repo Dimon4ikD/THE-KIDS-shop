@@ -7,6 +7,15 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
+  def save
+    @products = Product.all
+    respond_to do |format|
+      format.xlsx do
+        response.headers['Content-Disposition'] = 'attachment; filename="my_new_filename.xlsx"'
+      end
+    end
+  end
+
   # GET /products/1
   # GET /products/1.json
   def show

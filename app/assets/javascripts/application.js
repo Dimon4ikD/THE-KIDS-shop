@@ -16,4 +16,7 @@
 //= require jquery.maskedinput
 //= require bootstrap
 //= require bootstrap-growl.min
+//= require ace/ace
+//= require ace/theme-textmate
+//= require ace/mode-html
 //= require_tree .

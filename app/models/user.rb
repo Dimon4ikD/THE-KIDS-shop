@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
-  # cattr_reader :roles
+  cattr_reader :roles
   # @@roles=%w(Пользователь Администратор)
   belongs_to :role, class_name: 'Role'
 

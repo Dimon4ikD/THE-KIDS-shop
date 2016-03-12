@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   resources :sections
   resources :catalogs
   resources :covers
-  resources :products
+  resources :products do
+    collection do
+      get :save
+    end
+  end
   resources :line_items
   resources :product_orders
   resources :users
@@ -10,7 +14,7 @@ Rails.application.routes.draw do
   resources :password_resets
 
   get 'welcome/index', as: :welcome
-  # get 'dabase/dabase', as: :dabase
+  get 'dabase/dabase', as: :dabase
   get 'login' => 'welcome#new', :as => :login
   get 'logout' => 'welcome#destroy', :as => :logout
   post 'try_login' => 'welcome#create', :as => :try_login

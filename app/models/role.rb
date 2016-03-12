@@ -3,6 +3,6 @@ class Role < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   scope :ordering, -> { order(:name) }
-  validates :name, presence: true
+
 
 end

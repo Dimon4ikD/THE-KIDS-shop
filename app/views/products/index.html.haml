@@ -134,10 +134,13 @@
           -#        .button= link_to '', edit_book_path(prod), class: "btn btn-warning glyphicon glyphicon-pencil", title:"Редактировать"
           -#      %td
           -#        .button= link_to '', prod, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-danger glyphicon glyphicon-trash", title: "Удалить"
--if @current_user.try(:admin?)
-  .br
-  = link_to ' Новая Книга', new_product_path, class: "btn btn-primary fa fa-plus"
+-if @current_user.try(:is_admin?)
+  %br
+  = link_to ' Новый товар', new_product_path, class: "btn btn-primary fa fa-plus"
+  %p
+  %br
+  = link_to ' Сохранить базу', :action => :save, :format => :xlsx, class: "btn btn-primary fa fa-plus"
 
-.br
+%br
 
 

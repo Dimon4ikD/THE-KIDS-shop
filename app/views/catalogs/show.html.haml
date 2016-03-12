@@ -1,15 +1,39 @@
-%p#notice= notice
+-#%p#notice= notice
+-#
+-#%p
+-#  %b Name:
+-#  = @catalog.name
+-#%p
+-#  %b Hytml:
+-#  = @catalog.HyTML
+-#%p
+-#  %b Description:
+-#  = @catalog.description
+-#
+-#= link_to 'Edit', edit_catalog_path(@catalog)
+-#\|
+-#= link_to 'Back', catalogs_path
 
-%p
-  %b Name:
-  = @catalog.name
-%p
-  %b Hytml:
-  = @catalog.HyTML
-%p
-  %b Description:
-  = @catalog.description
 
-= link_to 'Edit', edit_catalog_path(@catalog)
-\|
-= link_to 'Back', catalogs_path
+= form_for '/edit' do  #, :name => 'editor', :id => :editor do
+  %p
+    %b --Editor--
+    #editor
+      puts 'qq11'
+
+
+-#.panel-heading
+-#  %h3.panel-title Editor
+-#  .panel-body
+-#    #editor
+-#      puts 'qq'
+
+-#%br
+
+-#= link_to 'New Catalog', new_catalog_path
+-#
+-##editor some text
+-#%script{:charset => "utf-8", :src => "src/ace.js", :type => "text/javascript"}
+-#:javascript
+-#  var editor = ace.edit("editor")
+

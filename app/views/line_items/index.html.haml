@@ -1,25 +1,78 @@
-%h1 Listing line_items
+-#%h1 Listing line_items
+-#
+-#%table
+-#  %thead
+-#    %tr
+-#      %th Product
+-#      %th Price
+-#      %th Quantity
+-#      %th
+-#      %th
+-#      %th
+-#
+-#  %tbody
+-#    - @line_items.each do |line_item|
+-#      %tr
+-#        %td= line_item.Product
+-#        %td= line_item.price
+-#        %td= line_item.quantity
+-#        %td= link_to 'Show', line_item
+-#        %td= link_to 'Edit', edit_line_item_path(line_item)
+-#        %td= link_to 'Destroy', line_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+-#
+-#%br
+-#
+-#= link_to 'New Line item', new_line_item_path
 
-%table
-  %thead
-    %tr
-      %th Product
-      %th Price
-      %th Quantity
-      %th
-      %th
-      %th
 
-  %tbody
-    - @line_items.each do |line_item|
-      %tr
-        %td= line_item.Product
-        %td= line_item.price
-        %td= line_item.quantity
-        %td= link_to 'Show', line_item
-        %td= link_to 'Edit', edit_line_item_path(line_item)
-        %td= link_to 'Destroy', line_item, :method => :delete, :data => { :confirm => 'Are you sure?' }
+.page-header
+  <h2>Корзина</h2>
+.row
+  .list-group
+    .list-group-item.active
+      .row
+        .col-md-3
+          Название
+        .col-md-3
+          Количество
+        .col-md-3
+          Цена
+        .col-md-3
+          Сумма
+  .list-group
+    - @line_items.each do |item|
+      .list-group-item
+        .row
+          .col-md-3
+            #{item.product.name}
+          .col-md-3
+            =link_to '',line_item_path(id:item.id,place:"line_items"), data:{method: :delete}, class:"btn btn-mini glyphicon glyphicon-minus"
+            #{item.quantity}
+            =link_to '',line_items_path(id:item.id,place:"line_items"),data:{method: :post}, class:"btn btn-mini glyphicon glyphicon-plus"
+          .col-md-3
+            #{item.price}
+          .col-md-3
+            #{item.quantity*item.price}
+%p
+.row
+  .col-md-4
+    .list-group
+      .list-group-item.active.glyphicon.glyphicon-list.li
+        Итог:
+      .list-group-item.glyphicon.glyphicon-info-sign.li
+        Всего товарных позиций: #{@line_items.length}
+        .br
+        .li
+          Всего книг:
+          #{@line_items.sum("quantity")}
+      .list-group-item.glyphicon.glyphicon-ruble
+        Цена:
+        -##{number_to_currency(@line_items.all_summ)}
 
-%br
-
-= link_to 'New Line item', new_line_item_path
+-#= link_to 'Редактировать', edit_cart_path(@cart), class: "btn btn-link"
+-#= link_to 'Очистить корзину', @line_items, data:{method: :delete, confirm: "Вы уверены?"}, class: "btn btn-primary"
+\|
+= link_to 'Вернуться к выбору товаров', products_path, class: "btn btn-info"
+\|
+= link_to 'Оформить заказ', new_product_order_path, class: "btn btn-danger"
+%p

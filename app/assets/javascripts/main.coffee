@@ -5,4 +5,6 @@ loaderf = ->
   true
 $(document).ready loaderf
 $(document).on 'page:load', loaderf
- 
+
+#$(document).ready alert('qq')
+#$(document).on "page:load", alert('qq')

@@ -19,10 +19,10 @@ module SideBarHelper
        :controller => :users, :action => :new,
        :icon => 'user-plus'},
       {:name => 'Наполнение',
-       :controller => :catalogs, :action => :new,
+       :controller => :catalogs, :action => :index,
        :icon => 'file-text-o'},
       {:name => 'База данных',
-       :controller => :welcome,
+       :controller => :dabase, :action => :dabase,
        :icon => 'database'}
 
     ]}
