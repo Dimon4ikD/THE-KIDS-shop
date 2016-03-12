@@ -6,5 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-    roless = Role.new([{name: 'Admin'}])
+    roless = Role.create([{name: 'Admin', number: '1'}, {name: 'Moderator', number: '2'}, {name: 'Buyer', number: '0'} ])
+
+
 

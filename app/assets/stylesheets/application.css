@@ -11,5 +11,7 @@
  * file per style scope.
  *
  *= require theme
+ *= require font-awesome
  *= require_self
+
  */
