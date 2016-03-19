@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  skip_before_action :check_app_auth, only: [:show, :index]
+  # skip_before_filter :require_login, :only => [:index, :new, :create, :activate]
 
   # GET /products
   # GET /products.json
@@ -8,10 +10,12 @@ class ProductsController < ApplicationController
   end
 
   def save
-    @products = Product.all
-    respond_to do |format|
-      format.xlsx do
-        response.headers['Content-Disposition'] = 'attachment; filename="my_new_filename.xlsx"'
+    if !@current_user.try(:is_admin?)
+      @products = Product.all
+      respond_to do |format|
+        format.xlsx do
+          response.headers['Content-Disposition'] = 'attachment; filename="my_new_filename.xlsx"'
+        end
       end
     end
   end

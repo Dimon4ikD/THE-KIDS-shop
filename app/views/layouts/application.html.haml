@@ -8,7 +8,7 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-    =favicon_link_tag 'favicon.ico'
+    =favicon_link_tag 'favicon-32x32.png'
     =favicon_link_tag 'favicon-32x32.png', sizes: '32x32'
     =favicon_link_tag 'apple-icon.png', rel: 'apple-touch-icon'
 
@@ -29,7 +29,8 @@
               =yield :error_messages
             = yield
     -else
-      #wrapper.toggled
+      #wrapper
+        =render 'application/sidebar'
         #page-content-wrapper
           =render 'flash_messages'
           -if content_for? :breadcrumb

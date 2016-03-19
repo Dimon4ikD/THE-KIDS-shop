@@ -43,6 +43,7 @@ gem 'paper_trail'
 gem 'paperclip'
 gem 'delayed_job_active_record'
 gem 'sorcery'
+gem 'ancestry'
 
 gem 'axlsx'
 gem 'axlsx_rails'

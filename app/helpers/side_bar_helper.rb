@@ -4,7 +4,7 @@ module SideBarHelper
     result << {
       :name => 'Главная',
       :icon => 'list',
-      :controller => :welcome, 
+      :controller => :welcome,
       :action => :index
     }
     result << {
@@ -24,8 +24,25 @@ module SideBarHelper
       {:name => 'База данных',
        :controller => :dabase, :action => :dabase,
        :icon => 'database'}
-
     ]}
+
+    Section.order(:name).all.each do |s|
+      item = {
+      :name => s.name,
+      :icon => 'users',
+      :children => []}
+      s.catalogs.order(:name).each do |c|
+          subitem = {:name => c.name,
+          :controller => 'catalogs',
+          :action => 'show',
+          :icon => 'users',
+          :params => {'id' => c.id}}
+          item[:children] << subitem
+        end
+      result << item
+    end
+
+
     result << {
       :name => 'Заголовок ссылок',
       :icon => 'search-plus',
@@ -37,7 +54,7 @@ module SideBarHelper
        :controller => :welcome, :action => :index,
        :icon => 'search',
        :class => 'long'}
-    ]} 
+    ]}
     result
   end
   

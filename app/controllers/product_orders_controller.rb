@@ -1,5 +1,6 @@
 class ProductOrdersController < ApplicationController
   before_action :set_product_order, only: [:show, :edit, :update, :destroy]
+  skip_before_action :check_app_auth, only: [:show, :index, :new]
 
   # GET /product_orders
   # GET /product_orders.json

@@ -17,6 +17,8 @@
 //= require bootstrap
 //= require bootstrap-growl.min
 //= require ace/ace
-//= require ace/theme-textmate
+////= require ace/theme-crimson_editor
+////= require ace/theme-pastel_on_dark
+//= require ace/theme-idle_fingers
 //= require ace/mode-html
 //= require_tree .

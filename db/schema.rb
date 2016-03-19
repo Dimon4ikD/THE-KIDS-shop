@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219213737) do
+ActiveRecord::Schema.define(version: 20160319065848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +22,11 @@ ActiveRecord::Schema.define(version: 20160219213737) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "ancestry"
   end
 
-  create_table "catalogs_catalogs", id: false, force: :cascade do |t|
+  create_table "catalogs_sections", id: false, force: :cascade do |t|
+    t.integer "section_id", null: false
     t.integer "catalog_id", null: false
   end
 
@@ -100,14 +102,11 @@ ActiveRecord::Schema.define(version: 20160219213737) do
   end
 
   create_table "sections", force: :cascade do |t|
-    t.integer  "catalog_id"
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
-
-  add_index "sections", ["catalog_id"], name: "index_sections_on_catalog_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                                       null: false
@@ -158,6 +157,5 @@ ActiveRecord::Schema.define(version: 20160219213737) do
   add_foreign_key "product_orders", "line_items"
   add_foreign_key "product_orders", "products"
   add_foreign_key "product_orders", "users"
-  add_foreign_key "sections", "catalogs"
   add_foreign_key "users", "roles"
 end

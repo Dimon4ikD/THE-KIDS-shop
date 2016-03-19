@@ -1,5 +1,6 @@
 class CatalogsController < ApplicationController
   before_action :set_catalog, only: [:show, :edit, :update, :destroy]
+  skip_before_action :check_app_auth, only: [:show, :index]
 
   # GET /catalogs
   # GET /catalogs.json

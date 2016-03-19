@@ -12,9 +12,10 @@ ready = ->
 #    alert('qq2')
     editor = ace.edit("editor")
 #    alert('qq3')
-    editor.setTheme("ace/theme/textmate")
+#    editor.setTheme("ace/theme/pastel_on_dark")
+    editor.setTheme("ace/theme/idle_fingers")
 #    alert('qq4')
-    editor.getSession().setMode("ace/mode/sql")
+    editor.getSession().setMode("ace/mode/html")
     alert('qq5')
 
 

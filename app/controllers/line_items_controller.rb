@@ -1,5 +1,8 @@
 class LineItemsController < ApplicationController
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
+  skip_before_action :check_app_auth, only: [:show, :index, :new]
+  # skip_before_filter :require_login, :only => [:index, :new, :create, :show]
+
 
   # GET /line_items
   # GET /line_items.json

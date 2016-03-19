@@ -9,4 +9,14 @@
     roless = Role.create([{name: 'Admin', number: '1'}, {name: 'Moderator', number: '2'}, {name: 'Buyer', number: '0'} ])
 
 
+    userss= User.create( name: 'Admin',email: 'av48412@gmail.com', password:'admin', password_confirmation:'admin', role: roless.first)
+    userss.activation_state = "active"
+    userss.save
 
+    sectionss= Section.create([name:"some thing"])
+
+    catalogss=Catalog.create([name:"Catalog 1", HyTML:"text_there", description:"desc"])
+
+    sectionss.first.catalogs<<catalogss.first
+
+    catalogss.first.children.create(name:"Catalog 2", HyTML:"text_there", description:"desc")

@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
             format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   # validates :role, presence: true, inclusion: {in: 0...@@roles.size}
   validates :role, presence: true #, inclusion: {in: 0...Roles.size}
-  validates :email, presence: true, uniqueness: {case_sensitive: false}
+  # validates :email, presence: true, uniqueness: {case_sensitive: false}
   validates :password, length: {minimum: 3}, confirmation: true,
             if: Proc.new { |u| u.new_record? or !u.password.blank? }
 

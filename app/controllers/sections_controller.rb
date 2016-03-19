@@ -1,5 +1,6 @@
 class SectionsController < ApplicationController
   before_action :set_section, only: [:show, :edit, :update, :destroy]
+  skip_before_action :check_app_auth, only: [:show, :index]
 
   # GET /sections
   # GET /sections.json

@@ -3,9 +3,17 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #editor {
-  //position: absolute
-  width: 500px;
-  height: 400px;
+  position: absolute;
+  width: 1000px;
+  height: 700px;
+  border-radius: 2%;
+  box-shadow: 7px 10px 7px 7px rgba(135, 133, 131, 0.31);
+}
+#editor:hover {
+  width: 1000px;
+  height: 700px;
+  border-radius: 2%;
+  box-shadow: 5px 6px 5px 7px rgba(135, 135, 131, 0.31);
 }
 //
 //.editor {

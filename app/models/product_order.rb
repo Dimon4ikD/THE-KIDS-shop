@@ -17,7 +17,7 @@ class ProductOrder < ActiveRecord::Base
 
   validates :user, presence: true
   validates :address, presence: true
-  validates :comment
+  # validates :comment
 
 
   #some testing metods
