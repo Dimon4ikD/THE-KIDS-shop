@@ -5,6 +5,9 @@ class CreateProductOrders < ActiveRecord::Migration
       t.references :product, index: true, foreign_key: true
       t.references :line_item, index: true, foreign_key: true
 
+      t.text :comment
+      t.text :address
+      t.text :status
       t.belongs_to :user, index: true, foreign_key: true
       t.belongs_to :product, index: true, foreign_key: true
       t.belongs_to :line_item, index: true, foreign_key: true

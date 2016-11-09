@@ -20,6 +20,8 @@ class WelcomeController < ApplicationController
   end
 
   def destroy
+    @line_item.destroy
+    welcome.delete(:user_id)
     logout
     redirect_to(root_path, notice: 'Сеанс работы в системе завершен')
   end  

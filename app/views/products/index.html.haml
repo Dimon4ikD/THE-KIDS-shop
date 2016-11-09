@@ -36,7 +36,7 @@
         .list-group-item
           .row.text-center
             .col-xs-3.pull-left
-              .button= link_to '', line_items_path(book_id: prod.id), data:{method: :post, remote: :true}, class:"btn btn-success btn-lg fa fa-cart-plus", title: "Добавить в корзину"
+              .button= link_to '', line_items_path(product_id: prod.id), data:{method: :post, remote: :true}, class:"btn btn-success btn-lg fa fa-cart-plus", title: "Добавить в корзину"
             -if @current_user.try(:is_admin?)
               .col-xs-3
                 .button= link_to '', prod, class: "btn btn-info btn-lg fa fa-eye", title: "Показать"
@@ -65,7 +65,7 @@
   = link_to ' Новый товар', new_product_path, class: "btn btn-primary fa fa-plus"
   %p
   %br
-  = link_to ' Сохранить базу', :action => :save, :format => :xlsx, class: "btn btn-primary fa fa-plus"
+  = link_to ' Сохранить базу', class: "btn btn-info", :action => :save, :format => :xlsx
 
 %br
 

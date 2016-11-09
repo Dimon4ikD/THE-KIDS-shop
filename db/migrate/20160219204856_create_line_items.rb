@@ -1,7 +1,6 @@
 class CreateLineItems < ActiveRecord::Migration
   def change
     create_table :line_items do |t|
-      # t.references :product, index: true, foreign_key: true
       t.belongs_to :product, index: true, foreign_key: true
       t.decimal :price, precision: 15, scale: 2
       t.integer :quantity

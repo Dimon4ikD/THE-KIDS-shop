@@ -20,3 +20,13 @@
     sectionss.first.catalogs<<catalogss.first
 
     catalogss.first.children.create(name:"Catalog 2", HyTML:"text_there", description:"desc")
+
+    productss=Product.create([name:"Тарелка", price: "150", amount:"3000"])
+    # productss.save
+    #
+    #
+    # t.string :name
+    # t.integer :amount
+    # t.attachment :cover
+    # t.integer :price
+    # t.references :catalog, index: true

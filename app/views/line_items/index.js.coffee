@@ -1,0 +1,1 @@
+<%=show_line_item(@line_item) if @line_item%>

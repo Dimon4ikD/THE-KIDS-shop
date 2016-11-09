@@ -1,21 +1,114 @@
-%p#notice= notice
+-#%p#notice= notice
+-#
+-#%p
+-#  %b Name:
+-#  = @product.name
+-#%p
+-#  %b Amount:
+-#  = @product.amount
+-#%p
+-#  %b Cover:
+-#  = @product.cover
+-#%p
+-#  %b Price:
+-#  = @product.price
+-#%p
+-#  %b Catalog:
+-#  = @product.Catalog
+-#
+-#= link_to 'Edit', edit_product_path(@product)
+-#\|
+-#= link_to 'Back', products_path
 
+
+-#-require 'open-uri'
+-#-require 'pdf/reader'
+.br
+.page-header
+  .h1=@product.name
+
+-#-if @book.image?
+-#  =link_to @book.image.url do
+-#    =image_tag @book.image.url(:thumb)
+    -#=image_tag @book.image, alt: @book.name
+
+
+-if !@product.cover.blank?
+  = image_tag @product.image.url(:medium), height:"265"#, alt: @book.name, class: 'img-responsive'
+-else
+  =image_tag ("аптечка.png"),src: root_path, height:"265", data: {toggle: "collapse", target:"#menu"}#, alt: @book.name, class: 'img-responsive'
+
+
+-#.row
+-#  .pull-right.col-md-3{style: "white-space: nowrap"}
+-#    .glyphicon.glyphicon-chevron-right
+-#    -@sum,@sum2=0,0;@cart.line_items.each{|itm| @sum+=itm.quantity;@sum2+=itm.price*itm.quantity}
+-#    = link_to "В вашей корзине #{@sum} #{Russian.p(@sum,'товар','товара','товаров')}. Общая цена: #{number_to_currency(@sum2, separator: ",", delimiter: "", unit: "₽", format: "%n %u")}", @cart, class: "btn btn-danger", :style => "white-space:normal; width: 216px;"
+
+-#t.string :name, null: false
+-#t.integer :amount
+-#t.date :year
+-#t.string :author, null: false
+-#t.integer :pages_amount
+-#t.string :isbn
+-#t.string :udc
+-#t.string :lbc
+-#t.integer :price
+-#t.text :description
+-#t.attachment :document
 %p
-  %b Name:
+%p
+  %b Название:
   = @product.name
 %p
-  %b Amount:
+  %b Количество:
   = @product.amount
+-#%p
+-#  %b Описание:
+-#  = @product.description
 %p
-  %b Cover:
-  = @product.cover
-%p
-  %b Price:
-  = @product.price
-%p
-  %b Catalog:
-  = @product.Catalog
+  %b Цена:
+  = number_to_currency(@product.price)
 
-= link_to 'Edit', edit_product_path(@product)
+-#%p
+-#  %b Book:
+-#  = @book.name
+-#  = link_to @book.document.url
+-#  =fa_icon "arrow-circle-right"
+
+-#%p
+-#  = link_to @book.document, class: "btn btn-link" do
+-#    =fa_icon "arrow-circle-right"
+
+%p
+
+-a=@line_item..where("product_id= ?",@product.id)
+-if !a.blank?
+  -b=a[0]
+  %b В вашей корзине:
+  =link_to '',line_item_path(id:b.id,place: "show"), data:{method: :delete}, class:"btn btn-mini glyphicon glyphicon-minus"
+  #{b.quantity}
+  =link_to '',line_items_path(id:b.id,place: "show"),data:{:method => :post}, class:"btn btn-mini glyphicon glyphicon-plus"
+%p
+-#%p
+-#-if @current_user.admin?
+-#  =  @book.document.url(:medium), alt: @book.name, class: 'img-responsive'
+
+= link_to line_items_path(product_id: @product.id,product:@product), data:{method: :post}, class: "btn btn-success" do
+  =fa_icon "cart-plus"
+  Добавить в корзину
 \|
-= link_to 'Back', products_path
+= link_to line_items_path, class: "btn btn-info" do
+  =fa_icon "shopping-cart"
+  Перейти к корзине
+-if @current_user.try(:is_admin?)
+  \|
+  = link_to edit_book_path(@product), class: "btn btn-warning" do
+    =fa_icon "pencil"
+    Редактировать
+\|
+= link_to products_path, class: "btn btn-primary" do
+  =fa_icon "reply"
+  Вернуться к списку книг
+%p
+

@@ -26,33 +26,27 @@ class ProductOrder < ActiveRecord::Base
 
   def check_cart
     if cart && cart.line_items.blank?
-      errors.add(:cart, "Корзина пуста!")
+      errors.add(:line_item, "Корзина пуста!")
     end
   end
 
   def decrease_q
     # self.cart.line_items.book.update()
     cart.line_items.each do |t|
-      if t.book.amount!=0
-        t.book.update(amount: t.book.amount-t.quantity)
+      if t.product.amount!=0
+        t.product.update(amount: t.product.amount-t.quantity)
         # t.book.amount-=t.quantity
         # t.book.save
-      else puts "Книг больше нет!"
+      else puts "Товаров больше нет!"
 
       end
     end
   end
 
 
-  def add_lineitems(cart)
-    line_items=[]
-    cart.line_items.each do |l_i|
-      l_i.cart_id=nil
-      line_items << l_i
-    end
-  end
+
   def send_mail
-    BookOrderMailer.info_email(self).deliver_later
+    ProductOrderMailer.info_email(self).deliver_later
     true
   end
 
