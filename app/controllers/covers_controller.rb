@@ -28,7 +28,7 @@ class CoversController < ApplicationController
 
     respond_to do |format|
       if @cover.save
-        format.html { redirect_to @cover, notice: 'Cover was successfully created.' }
+        format.html { redirect_to @cover, notice: 'Обложка была успешно создана.' }
         format.json { render :show, status: :created, location: @cover }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class CoversController < ApplicationController
   def update
     respond_to do |format|
       if @cover.update(cover_params)
-        format.html { redirect_to @cover, notice: 'Cover was successfully updated.' }
+        format.html { redirect_to @cover, notice: 'Обложка была успешно обновлена.' }
         format.json { render :show, status: :ok, location: @cover }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class CoversController < ApplicationController
   def destroy
     @cover.destroy
     respond_to do |format|
-      format.html { redirect_to covers_url, notice: 'Cover was successfully destroyed.' }
+      format.html { redirect_to covers_url, notice: 'Обложка была успешно удалена.' }
       format.json { head :no_content }
     end
   end

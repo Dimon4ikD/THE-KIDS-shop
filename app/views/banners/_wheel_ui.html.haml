@@ -1,0 +1,101 @@
+-#-@real_banners=Banner.where(frequency!=0)
+-benners = Banner.where("frequency != ?", 0).count
+-i=0
+-if benners>0
+  .col-sm-13.absolute.backy
+    %ul.uk-slideshow{"data-uk-slideshow" => "{autoplay:true, autoplayInterval:2000, animation: 'scroll'}"}
+      -@banners.each do |banner|
+        -if banner.can_show? #{:controller => "catalog", :action => "click", :banner => banner.id }, , params: { click: true}
+          %li{"data-uk-slideshow-item" => "#{i}"}
+            -#%div{"data-uk-parallax" => "{bg: '-200'}"}
+            =image_tag banner.image.url(:medium), class: "some_img"#, :style => "border: none"
+          -i+=1
+          -#=image_tag "img_4522.png", class: "img_some", :style => "border: none"
+
+    .uk-slidenav-position{"data-uk-slideshow" => ""}
+      %ul.uk-slideshow
+        %li
+      %a.uk-slidenav.uk-slidenav-contrast.uk-slidenav-previous{"data-uk-slideshow-item" => "previous", :href => ""}
+      %a.uk-slidenav.uk-slidenav-contrast.uk-slidenav-next{"data-uk-slideshow-item" => "next", :href => ""}
+      -for j in benners...0 do
+        %ul.uk-dotnav.uk-dotnav-contrast.uk-position-bottom.uk-flex-center
+          %li{"data-uk-slideshow-item" => "#{j}"}
+            %a{:href => ""}
+        -j+=1
+
+
+
+
+      -#.col-sm-13.absolute
+      -#  %ul.uk-slideshow.uk-fade{"data-uk-slideshow" => "{autoplay:true, kenburns:true}"}
+      -#    %li{"data-uk-slideshow-item" => "0"}
+      -#      =image_tag "img_4522.png", class: "img_some", :style => "border: none"
+      -#    %li{"data-uk-slideshow-item" => "1"}
+      -#      =image_tag "banner5.jpg", class: "img_some", :style => "border: none"
+      -#    %li{"data-uk-slideshow-item" => "1"}
+      -#      =image_tag "banner5_1.jpg", class: "img_some", :style => "border: none"
+
+        -#%img{:alt => "img_4522.png", :height => "30px", :src => "app/assets/images/img_4522.png", :width => ""}
+
+        -#
+        -#%div{"data-uk-slideshow" => ""}
+        -#  %ul.uk-slideshow
+        -#    %li
+        -#    %li
+        -#  %ul
+        -#    %li{"data-uk-slideshow-item" => "0"}
+        -#      %a{:href => ""} ...
+        -#    %li{"data-uk-slideshow-item" => "1"}
+        -#      %a{:href => ""} ...
+        -#
+        -#%div{"data-uk-slideshow" => ""}
+        -#  %ul.uk-slideshow
+        -#    %li
+        -#    %li
+        -#  %a{"data-uk-slideshow-item" => "previous", :href => ""}
+        -#  %a{"data-uk-slideshow-item" => "next", :href => ""}
+
+
+
+
+
+    -#.jumbotron-lg
+    -#  #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+    -#    / Indicators
+    -#
+    -#    %ol.carousel-indicators
+    -#      %li.active{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+    -#      -i=1
+    -#      -benners.times do
+    -#
+    -#        %li{"data-slide-to" => "#{i+1}", "data-target" => "#carousel-example-generic"}
+    -#
+    -#
+    -#    / Wrapper for slides
+    -#
+    -#    .carousel-inner{:role => "listbox"}
+    -#      .item.active
+    -#        =image_tag "img_4522.png", class: "img_some", :style => "border: none"
+    -#      -@banners.each do |banner|
+    -#
+    -#        -if banner.can_show? #{:controller => "catalog", :action => "click", :banner => banner.id }, , params: { click: true}
+    -#          .item
+    -#            = link_to banner.catalog(click: true), class: "form-group" do
+    -#              =image_tag banner.image.url(:medium), class: "img_some", :style => "border: none"
+    -#              -#-if banner.toogled
+    -#              -#  -banner.decrease_f
+    -#              .carousel-caption
+    -#
+    -#    / Controls
+    -#    %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel-example-generic", :role => "button"}
+    -#      %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+    -#      %span.sr-only Назад
+    -#    %a.right.carousel-control{"data-slide" => "next", :href => "#carousel-example-generic", :role => "button"}
+    -#      %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+    -#      %span.sr-only Вперед
+    -#
+
+
+-else
+  .col-md-12
+    %b

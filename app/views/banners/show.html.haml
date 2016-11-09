@@ -1,0 +1,116 @@
+.page-header
+  %h1
+    Баннер
+.media
+  -if @banner.image?
+    .media-left=image_tag @banner.image.url(:thumb), class: 'media-object'
+  -else "Изображение отсутствует"
+
+.row
+  .col-md-5
+
+    %h3="Каталог: " "#{@banner.catalog.name}"
+.row
+  .col-md-5
+    %h3="Показов осталось: " "#{@banner.frequency}"
+.row
+  .col-md-5
+    %h3="Просмотров: " "#{@banner.click}"
+-#.row
+-#  .col-md-8
+-#    %h3="Дата начала: " "#{@banner.start_date}"
+-#.row
+-#  .col-md-8
+-#    %h3="Дата окончания: " "#{@banner.end_date }"
+
+
+-#
+-#:javascript
+-#  $('.input-group.date').datepicker({
+-#    language: "ru",
+-#    autoclose: true
+-#  });
+
+-#.col-md-9
+-#  -if @person.birthday
+-#    %dl
+-#      %dt=Person.human_attribute_name(:birthday)
+-#      %dd
+-#        =l(@person.birthday, format: :long)
+-#        %span.text-muted
+-#          =surround ?(,?) do
+-#            =@person.human_age
+-#
+-#%p
+-#  %b Частота:
+-#  = @banner.frequency
+-#
+%p
+= link_to 'Изменить', edit_banner_path(@banner), class: 'btn btn-primary'
+\|
+= link_to 'Назад', banners_path, class: 'btn btn-primary'
+\|
+=link_to @banner, data: {method: :delete, confirm: t('helpers.sure')}, class: 'btn btn-danger' do
+  =fa_icon 'trash'
+  Удалить
+%p
+-#
+
+-#
+-#.page-header
+-#  %h1
+-#    =@person.name
+-#    -if @person.origin_name.present?
+-#      %small=@person.origin_name
+-#-if Person.manage?(@current_user)
+-#  .btn-toolbar
+-#    =link_to edit_person_path(@person), class: 'btn btn-primary' do
+-#      =fa_icon 'edit'
+-#      Редактировать
+-#    -if @person.can_destroy?
+-#      =link_to @person, data: {method: :delete, confirm: t('helpers.sure')}, class: 'btn btn-danger' do
+-#        =fa_icon 'trash'
+-#        Удалить
+-#.row
+-#  .col-md-3
+-#    -if @person.avatar?
+-#      =image_tag @person.avatar.url(:medium), alt: @person.name, class: 'img-responsive'
+-#  .col-md-9
+-#    -if @person.birthday
+-#      %dl
+-#        %dt=Person.human_attribute_name(:birthday)
+-#        %dd
+-#          =l(@person.birthday, format: :long)
+-#          %span.text-muted
+-#            =surround ?(,?) do
+-#              =@person.human_age
+-#    -if @person.produced_catalogs.any?
+-#      %h3=Catalog.human_attribute_name(:director_id)
+-#      .list-group
+-#        -@person.produced_catalogs.each do |catalog|
+-#          =render 'catalogs/catalog', catalog: catalog
+-#    -if @person.catalogs.any?
+-#      %h3=Person.human_attribute_name(:catalogs)
+-#      .list-group
+-#        -@person.catalogs.each do |catalog|
+-#          =render 'catalogs/catalog', catalog: catalog
+-#
+
+
+-#
+
+
+          -#
+-#-#
+-#-#
+-#
+-#=link_to catalog, class: 'list-group-item' do
+-#  .media
+-#    -if catalog.cover?
+-#      .media-left=image_tag catalog.cover.url(:thumb), alt: catalog.name, class: 'media-object'
+-#    .media-body
+-#      %h4.media-heading
+-#        =catalog.name
+-#      %i
+-#        =catalog.genre.name
+-#      %small.text-muted=catalog.year

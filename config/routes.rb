@@ -1,22 +1,33 @@
 Rails.application.routes.draw do
+  resources :banners
+  resources :carts
   resources :sections
   resources :catalogs
   resources :covers
   resources :products do
     collection do
       get :save
+      get :search
     end
   end
-  resources :line_items
+  resources :line_items do
+    member do
+      get :plus_minus
+    end
+  end
   resources :product_orders
   resources :users
   resources :roles
   resources :password_resets
 
+
   get 'welcome/index', as: :welcome
   get 'dabase/dabase', as: :dabase
+  post 'dabase/upload', as: :upload
+
   get 'login' => 'welcome#new', :as => :login
   get 'logout' => 'welcome#destroy', :as => :logout
+
   post 'try_login' => 'welcome#create', :as => :try_login
   root 'welcome#index'
 

@@ -1,0 +1,66 @@
+// Place all the styles related to the Banners controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+div#rotator {position:relative; height:150px; margin-left: 15px:}
+div#rotator ul li {float:left; position:absolute; list-style: none;}
+div#rotator ul li.show {z-index:500;}
+
+//.item.active {
+//  height: 70px;
+//}
+//.style_image {
+//  border-right: 1px solid #000;
+//}
+
+//
+//.peopleCarouselImg img {
+//  width: auto;
+//  height: 225px!important;
+//  max-height: 225px;
+//  align: center!important;
+//}
+
+//.carousel-control {
+//  top: 700px!important;
+//}
+//
+//.inner-item {
+//  text-align: center!important;
+//  image_tag {
+//    position: absolute;
+//    top: 0; bottom:0; left: 0; right:0;
+//    margin: auto;
+//  }
+//}
+
+//
+//.img_some{
+//  position: absolute;
+//  top: 1; bottom:1; left: 1; right:1;
+//  margin: auto;
+//}
+//.carousel .item img {
+//  left: -9999px;  /*important */
+//  right: -9999px;  /*important */
+//  margin: 0 auto;  /*important */
+//  max-width: none;  /*important */
+//  min-width: 100%;
+//  position: absolute;
+//}
+
+//
+//.carousel-inner { text-align: center!important; }
+//
+//.carousel .item .active> image_tag { display: inline-block!important;
+//  background-position:center;
+//}
+
+
+//.carousel-inner>.active{
+//  height:40%!important;
+//}
+
+.carousel .item .active{
+  position: absolute;
+}

@@ -11,10 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319065848) do
+ActiveRecord::Schema.define(version: 20160402062945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "banners", force: :cascade do |t|
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.integer  "frequency"
+    t.integer  "click",              default: 0
+    t.time     "start_date"
+    t.time     "end_date"
+    t.integer  "catalog_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "banners", ["catalog_id"], name: "index_banners_on_catalog_id", using: :btree
+
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "catalogs", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +44,10 @@ ActiveRecord::Schema.define(version: 20160319065848) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "ancestry"
+  end
+
+  create_table "catalogs_catalogs", id: false, force: :cascade do |t|
+    t.integer "catalog_id", null: false
   end
 
   create_table "catalogs_sections", id: false, force: :cascade do |t|
@@ -60,21 +85,35 @@ ActiveRecord::Schema.define(version: 20160319065848) do
   create_table "line_items", force: :cascade do |t|
     t.integer  "product_id"
     t.decimal  "price",      precision: 15, scale: 2
+    t.integer  "cart_id"
     t.integer  "quantity"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
 
+  add_index "line_items", ["cart_id"], name: "index_line_items_on_cart_id", using: :btree
   add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "searchable_id"
+    t.string   "searchable_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
 
   create_table "product_orders", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "product_id"
     t.integer  "line_item_id"
+    t.integer  "cart_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
+  add_index "product_orders", ["cart_id"], name: "index_product_orders_on_cart_id", using: :btree
   add_index "product_orders", ["line_item_id"], name: "index_product_orders_on_line_item_id", using: :btree
   add_index "product_orders", ["product_id"], name: "index_product_orders_on_product_id", using: :btree
   add_index "product_orders", ["user_id"], name: "index_product_orders_on_user_id", using: :btree
@@ -87,6 +126,7 @@ ActiveRecord::Schema.define(version: 20160319065848) do
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
     t.integer  "price"
+    t.text     "description"
     t.integer  "catalog_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
@@ -153,9 +193,13 @@ ActiveRecord::Schema.define(version: 20160319065848) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "banners", "catalogs"
+  add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "products"
+  add_foreign_key "product_orders", "carts"
   add_foreign_key "product_orders", "line_items"
   add_foreign_key "product_orders", "products"
   add_foreign_key "product_orders", "users"
+  add_foreign_key "products", "catalogs"
   add_foreign_key "users", "roles"
 end

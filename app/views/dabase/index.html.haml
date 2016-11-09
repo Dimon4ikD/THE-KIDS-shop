@@ -1,0 +1,21 @@
+
+.col-md-4
+  .form-group
+    =f.label :image
+    =f.file_field :image, class: 'form-control'
+
+  -if @banner.image?
+    .text-center
+      =link_to @banner.image.url do
+        =image_tag @banner.image.url(:thumb)
+
+
+  .actions
+    = f.submit nil, class: 'btn btn-primary'
+      -#
+      -#.row
+      -#  .col-md-4
+      -#    .form-group
+      -#      =f.label :catalog_id
+      -#      =f.text_field :catalog_id, data: {tokeninput:  people_path(format: :json),
+      -#      pre: [@catalog.director].compact.to_json, limit: 1}

@@ -1,0 +1,59 @@
+.container.col-xs-11.col-sm-12
+  %p
+  -@products.each do |prod|
+    .col-sm-3
+      .list-group
+        .list-group-item
+          -if !prod.cover.blank?
+            = link_to prod, class: "form-group" do
+              =image_tag prod.image.url(:medium), height:"165", style: "display: block; margin: 0px auto;", alt: prod.name, class: "thumb"
+          -else
+            = link_to prod, class: "form-group" do
+              =image_tag ("аптечка.jpg"),src: root_path, height:"165", style: "display: block; margin: auto; text_align:center;"#, data: {toggle: "collapse", target:"#menu"}
+
+          %p
+          .col-sm-1
+          -#.col-sm-2
+          .row.abs.center
+            %h7
+
+              = link_to "  #{prod.name}", prod, style: "color: black; padding: 10px;"
+          .col-sm-1
+          %p
+          .col-sm-1
+
+
+        .list-group-item
+          Цена:
+          .badge
+          -if prod.price < 2000
+            .badge.price
+              =number_to_currency(prod.price)
+          -else
+            .badge
+              =number_to_currency(prod.price)
+
+        .list-group-item
+          .row.text-center
+            .col-sm-2
+              -a=@cart.line_items.where("product_id= ?",prod.id)
+              -if !a.blank?
+                .button= link_to '', line_items_path(product_id: prod.id), data:{method: :post, remote: :true}, class:"btn btn-sm btn-success btn-lg fa fa-check", id: "cart_link#{prod.id}", title: "Добавлено"
+              -else
+                .button= link_to '', line_items_path(product_id: prod.id), data:{method: :post, remote: :true}, class:"btn btn-sm btn-success btn-lg fa fa-cart-plus", id: "cart_link#{prod.id}", title: "Добавить в корзину"
+
+            -if @current_user.try(:is_admin?)
+              .col-xs-4.col-sm-4.col-lg-4.pull-left
+                .button= link_to '', prod, class: "btn btn-sm btn-info btn-lg fa fa-eye", title: "Показать"
+            -if @current_user.nil? or !@current_user.nil? and  !@current_user.try(:is_admin?)
+              -#//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+              .col-xs-4.col-sm-4.col-lg-4.pull-right
+                .button= link_to '', prod, class: "btn btn-sm btn-info btn-lg fa fa-eye", title: "Показать"
+            -if @current_user.try(:is_admin?)
+              .col-xs-4.col-sm-4.pull-right
+                .button= link_to '', edit_product_path(prod), class: "btn btn-sm btn-warning btn-lg fa fa-pencil", title:"Редактировать"
+              .col-md-2
+                .button= link_to '', prod, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-sm btn-danger btn-lg  fa fa-trash", title: "Удалить"
+
+.br
+= paginate @products

@@ -21,7 +21,7 @@
 
 en:
   app:
-    name: Kids Shop
+    name: Med Shop
     company:
-      short_name: Shoping center
-      department: Kids
+      short_name: MedShop
+      department: Med

@@ -1,0 +1,10 @@
+%h1 Изменение корзины
+
+-if @current_user.try(:admin?)
+  = render 'form'
+
+  = link_to 'Посмотреть', @cart
+  \|
+  = link_to 'Назад', carts_path
+-else
+  = render login_path

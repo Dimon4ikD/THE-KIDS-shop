@@ -1,6 +1,49 @@
-%h1 Editing catalog
+%h1 Редактирование каталога
 
 = render 'form'
+
+
+
+-#
+-#.fr-view
+-#  Here comes the HTML edited with the Froala rich text editor.
+
+
+-#!!!!!!!!
+
+-#%form
+-#  %textarea#edit{:name => "content"}
+-#
+-#
+-#
+-#  %link{:href => "../css/froala_style.min.css", :rel => "stylesheet", :type => "text/css"}/
+-#
+-#  .fr-view
+-#    Here comes the HTML edited with the Froala rich text editor.
+
+//!!!!!!!!!!
+
+
+-#= form_for '/edit' do  #, :name => 'editor', :id => :editor do
+-#  %p
+-#    %b  - - Редактор - -
+-#    #editor
+-#      <!DOCTYPE html>
+-#      <html>
+-#      <body>
+-#
+-#      <p>This is a paragraph.</p>
+-#      <p>This is a paragraph.</p>
+-#      <p>This is a paragraph.</p>
+-#      </plaintext>
+-#      "<li>
+-#      (8)
+-#      <li></li>
+-#      </li>"
+-#
+-#
+-#      </body>
+-#      </html>
 
 = link_to 'Show', @catalog
 \|

@@ -6,15 +6,16 @@
 //.field_with_errors
 //  @extend .has-error
 
-
+@import "bootstrap-sprockets"
+@import "bootstrap"
 
 @include text-emphasis-variant('.text-purple', $brand-purple)
 
 body
-  font-family: 'Open Sans'
+  font-family: 'Helvetica Neue'
 
 .light
-  font-family: 'Open Sans'
+  font-family: 'Helvetica Neue'
   font-weight: 100
 
 .intro
@@ -22,6 +23,9 @@ body
 
 .has-error .form-control:focus, .form-control:focus
   box-shadow: none
+.backy
+  background: #929498
+
 
 h1, h2, h3
   margin-top: 10px
@@ -33,6 +37,27 @@ h1, h2, h3
 
 .field_with_errors
   @extend .has-error
+
+
+//#query.form-control
+//  box-shadow: 0 2px 2px 0 rgba(129, 127, 125, 0.31)
+//.btnboldd
+//  box-shadow: 0
+//
+
+.btn.noshadow
+  -webkit-box-shadow: none
+  -moz-box-shadow: none
+  box-shadow: none
+  background: $navbar-inverse-bg
+
+.row.abs
+  height: 50px
+.row.abs.sm
+  height: 70px
+
+#query.form-control:focus
+  box-shadow: rgba(0, 0, 0, 0.0745098) 0px 1px 1px 0px inset, rgba(102, 175, 233, 0.6) 0px 0px 8px 0px
 
 
 
@@ -106,12 +131,15 @@ a
 
 
 .btn
-  border-radius: 5%
-  box-shadow: 0 2px 0 0 rgba(135, 133, 131, 0.31)
+  //border-radius: 10%
+  //border-radius: 10px 10px 20px 20px
+  box-shadow: 0 2px 0 0 rgba(129, 127, 125, 0.31)
 .btn:hover
-  //background: darkblue
-  border-radius: 5%
-  border-bottom-width: 2px
+//background: darkblue
+//border-radius: 5%
+//border-radius: 40px 40px 40px 40px
+//border-radius: 2em
+//border-bottom-width: -2px
 //box-shadow: 0 2px 0 0 #dcd8d5
 //box-shadow: 0 2px 0 0 #007299
 //background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #1993bc), color-stop(100%, #147798))
@@ -119,8 +147,8 @@ a
 .btn.raised:active, .btn.raised.active
   background: #33a6cc
   box-shadow: none
-  margin-bottom: -3px
-  margin-top: 3px
+//margin-bottom: -3px
+//margin-top: 3px
 
 //
 //.form-control
@@ -143,10 +171,6 @@ a
   //border-radius: 10%
   color: #fff !important
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.13)
-
-
-
-
 
 
 
@@ -176,9 +200,11 @@ a
     position: relative
 
 .breadcrumb
-  text-align: right
+  text-align: left
+  font-size: 12px
   margin: 0px 0px 0px 0px
   padding: 0px 0px 0px 0px
+  //box-shadow: 2px 2px 2px 0 rgba(135, 133, 131, 0.31)
 .sqlabel
   padding: 5px 5px 5px 5px
   color: #fff

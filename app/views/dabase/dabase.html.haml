@@ -1,5 +1,18 @@
 .page-header
   %h1 База данных
+= form_tag upload_path, method: :post, multipart: true do
+  %label{:for => "file"}
+  %h3 Загрузка базы из файла
+  %p Выберите файл для загрузки
+  %p
+  = file_field_tag "file"
+  %p
+  = submit_tag 'Сохранить', class: "btn btn-primary"
+  %hr
+  %h3 Создание дампа всей базы
+  %p
+  = submit_tag 'Создать дамп', class: "btn btn-primary"
+
 
 -#
 -#= form_for @product do |f|
@@ -61,5 +74,3 @@
 -#    =password_field_tag :password,nil,class:"form-control",required: true
 -#  %p
 -#    .actions=submit_tag "Войти", class:"btn btn-primary"
-
-

@@ -1,7 +1,7 @@
 class ProductOrder < ActiveRecord::Base
-  belongs_to :User
-  belongs_to :Product
-  belongs_to :LineItem
+  belongs_to :user
+  belongs_to :product
+  belongs_to :lineitem
 
 
 
@@ -14,7 +14,7 @@ class ProductOrder < ActiveRecord::Base
   scope :ordering, -> {order(created_at: :desc)}
 
   # STATUSES=%w(Оформлен Подтверждён Отменён Доставляется Завершён) #0 1 2 3 4
-
+  validates :cart, presence: true
   validates :user, presence: true
   validates :address, presence: true
   # validates :comment
@@ -33,16 +33,15 @@ class ProductOrder < ActiveRecord::Base
   def decrease_q
     # self.cart.line_items.book.update()
     cart.line_items.each do |t|
-      if t.book.amount!=0
-        t.book.update(amount: t.book.amount-t.quantity)
+      if t.product.amount!=0
+        t.product.update(amount: t.product.amount-t.quantity)
         # t.book.amount-=t.quantity
         # t.book.save
-      else puts "Книг больше нет!"
+      else puts "Товаров больше нет!"
 
       end
     end
   end
-
 
   def add_lineitems(cart)
     line_items=[]
@@ -51,8 +50,10 @@ class ProductOrder < ActiveRecord::Base
       line_items << l_i
     end
   end
+
+
   def send_mail
-    BookOrderMailer.info_email(self).deliver_later
+    ProductOrderMailer.info_email(self).deliver_later
     true
   end
 

@@ -1,0 +1,1 @@
+$("#li_plus<%= @line_item.id %>").closest('.list-group-item').remove()

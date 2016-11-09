@@ -1,0 +1,57 @@
+- @products.each do |object|
+  -#-if object.kind_of?(Product)
+  -#=render 'searched_products'
+  -#-@results.each do |object|
+
+  .row
+    .list-groupf
+      .col-sm-11.col-lg-11
+        .list-group-item
+          .row
+          .row
+            .col-sm-3
+              -if !object.cover.blank?
+                = link_to object, class: "form-group" do
+                  =image_tag object.image.url(:medium), height:"105", style: "display: block; margin: 0px auto;", alt: object.name, class: "thumb"
+              -else
+                = link_to object, class: "form-group" do
+                  =image_tag ("аптечка.jpg"),src: root_path, height:"105", style: "display: block; margin: auto; text_align:center;"#, data: {toggle: "collapse", target:"#menu"}
+            .col-sm-6
+              %h7
+                = link_to "#{object.name}", object, style: "color: black"
+              .p
+                Description and others
+
+            .col-sm-2.col-lg-2.col-xs-3
+              -#Цена:
+              .badge
+              -if object.price < 2000
+                %h4
+                  =number_to_currency(object.price)
+              -else
+                %h4
+                  =number_to_currency(object.price)
+
+          .row
+            .col-sm-1.pull-right
+              -a=@cart.line_items.where("product_id= ?",object.id)
+              -if !a.blank?
+                .button= link_to '', line_items_path(product_id: object.id), data:{method: :post, remote: :true}, class:"btn btn-sm btn-success btn-lg fa fa-check", id: "cart_link#{object.id}", title: "Добавлено"
+              -else
+                .button= link_to '', line_items_path(product_id: object.id), data:{method: :post, remote: :true}, class:"btn btn-sm btn-success btn-lg fa fa-cart-plus", id: "cart_link#{object.id}", title: "Добавить в корзину"
+            -#.uk-button{"data-message" => "mess", "data-pos" => "top-center"}
+
+
+            -if @current_user.try(:is_admin?)
+              .col-sm-1.pull-right
+                .button= link_to '', object, class: "btn btn-sm btn-info btn-lg fa fa-eye", title: "Показать"
+            -if @current_user.nil? or !@current_user.nil? and  !@current_user.try(:is_admin?)
+              -#//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+              .col-sm-1.col-lg-1.pull-right
+                .button= link_to '', object, class: "btn btn-sm btn-info btn-lg fa fa-eye", title: "Показать"
+            -if @current_user.try(:is_admin?)
+              .col-sm-1.pull-right
+                .button= link_to '', edit_product_path(object), class: "btn btn-sm btn-warning btn-lg fa fa-pencil", title:"Редактировать"
+              .col-sm-1.pull-right
+                .button= link_to '', object, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-sm btn-danger btn-lg  fa fa-trash", title: "Удалить"
+-#-else object.inspect

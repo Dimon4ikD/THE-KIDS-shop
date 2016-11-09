@@ -5,7 +5,10 @@ class CreateProducts < ActiveRecord::Migration
       t.integer :amount
       t.attachment :cover
       t.integer :price
-      t.references :catalog, index: true
+      t.text :description
+      t.references :catalog, index: true, foreign_key: true
+
+      t.belongs_to :catalog, index: true, foreign_key: true
 
 
       t.timestamps null: false

@@ -1,0 +1,74 @@
+-#= form_for @banner do |f|
+-#  - if @banner.errors.any?
+-#    #error_explanation
+-#      %h2= "#{pluralize(@banner.errors.count, "error")} prohibited this banner from being saved:"
+-#      %ul
+-#        - @banner.errors.full_messages.each do |msg|
+-#          %li= msg
+-#
+-#  .field
+-#    = f.label :film
+-#    = f.text_field :film
+-#  .field
+-#    = f.label :image
+-#    = f.text_field :image
+-#  .field
+-#    = f.label :frequency
+-#    = f.number_field :frequency
+-#  .actions
+-#    = f.submit 'Сохранить'
+-#
+
+
+
+= form_for @banner do |f|
+  =error_messages_for(@banner)
+  .row
+    -#.col-md-4
+    -#  .form-group
+    -#    =f.label :id
+    -#    =f.number_field :id, class: 'form-control'
+    .col-md-6
+      .form-group
+        =f.label :catalog_id, "Каталог"
+        =f.select :catalog_id, Catalog.ordering.map{|c| [c.name,c.id]},{}, class: 'form-control'
+    .col-md-6
+      .form-group
+        =f.label :frequency
+        =f.number_field :frequency, class: 'form-control'
+    -#.col-md-6
+    -#  .form-group
+    -#    =f.label :click
+    -#    =f.number_field :click, class: 'form-control'
+
+
+
+    -#.col-md-6
+    -#  .form-group
+    -#    =f.label :start_date
+    -#    =f.text_field :start_date, class: 'form-control', data: {masked: 'datetime'}, value: (l(@banner.start_date) if @banner.start_date)
+    -#.col-md-6
+    -#  .form-group
+    -#    =f.label :end_date
+    -#    =f.text_field :end_date, class: 'form-control', data: {masked: 'datetime'}, value: (l(@banner.end_date) if @banner.end_date)
+    -#.col-md-4
+    .col-md-4
+      .form-group
+        =f.label :image
+        =f.file_field :image, class: 'form-control'
+
+      -if @banner.image?
+        .text-center
+          =link_to @banner.image.url do
+            =image_tag @banner.image.url(:thumb)
+
+
+  .actions
+    = f.submit nil, class: 'btn btn-primary'
+  -#
+  -#.row
+  -#  .col-md-4
+  -#    .form-group
+  -#      =f.label :catalog_id
+  -#      =f.text_field :catalog_id, data: {tokeninput:  people_path(format: :json),
+  -#      pre: [@catalog.director].compact.to_json, limit: 1}

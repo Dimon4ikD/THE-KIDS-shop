@@ -5,12 +5,14 @@ class CatalogsController < ApplicationController
   # GET /catalogs
   # GET /catalogs.json
   def index
-    @catalogs = Catalog.all
+    # @catalogs = Catalog.all
+    @catalogs = Catalog.ordering.page(params[:page])
   end
 
   # GET /catalogs/1
   # GET /catalogs/1.json
   def show
+    @products=@catalog.products.page(params[:page])
   end
 
   # GET /catalogs/new
@@ -26,10 +28,11 @@ class CatalogsController < ApplicationController
   # POST /catalogs.json
   def create
     @catalog = Catalog.new(catalog_params)
+    @catalog.HyTML = params['content']
 
     respond_to do |format|
       if @catalog.save
-        format.html { redirect_to @catalog, notice: 'Catalog was successfully created.' }
+        format.html { redirect_to @catalog, notice: 'Каталог был успешно создан.' }
         format.json { render :show, status: :created, location: @catalog }
       else
         format.html { render :new }
@@ -41,14 +44,17 @@ class CatalogsController < ApplicationController
   # PATCH/PUT /catalogs/1
   # PATCH/PUT /catalogs/1.json
   def update
+    # raise params.inspect
+    @catalog.HyTML = params['content']
     respond_to do |format|
       if @catalog.update(catalog_params)
-        format.html { redirect_to @catalog, notice: 'Catalog was successfully updated.' }
+        format.html { redirect_to @catalog, notice: 'Каталог был успешно изменен.' }
         format.json { render :show, status: :ok, location: @catalog }
       else
         format.html { render :edit }
         format.json { render json: @catalog.errors, status: :unprocessable_entity }
       end
+
     end
   end
 
@@ -57,7 +63,7 @@ class CatalogsController < ApplicationController
   def destroy
     @catalog.destroy
     respond_to do |format|
-      format.html { redirect_to catalogs_url, notice: 'Catalog was successfully destroyed.' }
+      format.html { redirect_to catalogs_url, notice: 'Каталог был успешно удален.' }
       format.json { head :no_content }
     end
   end
@@ -70,6 +76,6 @@ class CatalogsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def catalog_params
-      params.require(:catalog).permit(:name, :HyTML, :description)
+      params.require(:catalog).permit(:name, :HyTML, :description, :sections)
     end
 end

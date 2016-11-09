@@ -46,9 +46,9 @@
           .col-md-3
             #{item.product.name}
           .col-md-3
-            =link_to '',line_item_path(id:item.id,place:"line_items"), data:{method: :delete}, class:"btn btn-mini glyphicon glyphicon-minus"
+            =link_to '', plus_minus_line_item_path(id: item.id ,op: :minus), class:"btn btn-mini glyphicon glyphicon-minus", id: "li_minus#{item.id}", remote: true
             #{item.quantity}
-            =link_to '',line_items_path(id:item.id,place:"line_items"),data:{method: :post}, class:"btn btn-mini glyphicon glyphicon-plus"
+            =link_to '', plus_minus_line_item_path(id: item.id,op: :plus), class:"btn btn-mini glyphicon glyphicon-plus", id: "li_plus#{item.id}", remote: true
           .col-md-3
             #{item.price}
           .col-md-3
@@ -63,16 +63,16 @@
         Всего товарных позиций: #{@line_items.length}
         .br
         .li
-          Всего книг:
+          Всего товаров:
           #{@line_items.sum("quantity")}
       .list-group-item.glyphicon.glyphicon-ruble
         Цена:
-        -##{number_to_currency(@line_items.all_summ)}
+        #{number_to_currency(@cart.all_summ)}
 
 -#= link_to 'Редактировать', edit_cart_path(@cart), class: "btn btn-link"
--#= link_to 'Очистить корзину', @line_items, data:{method: :delete, confirm: "Вы уверены?"}, class: "btn btn-primary"
+= link_to 'Очистить корзину', @cart, data:{method: :delete, confirm: "Вы уверены?"}, class: "btn btn-primary"
 \|
-= link_to 'Вернуться к выбору товаров', products_path, class: "btn btn-info"
+= link_to 'Вернуться к выбору товара', products_path, class: "btn btn-info"
 \|
 = link_to 'Оформить заказ', new_product_order_path, class: "btn btn-danger"
 %p

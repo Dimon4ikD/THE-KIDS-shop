@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
   cattr_reader :roles
   # @@roles=%w(Пользователь Администратор)
   belongs_to :role, class_name: 'Role'
+  has_many :product_orders, dependent: :nullify
 
   validates :name, presence: true, length: {minimum: 2, maximum: 255}
-  validates :email, presence: true, uniqueness: {case_sensitive: false},
-            format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  validates :email, presence: true, uniqueness: {case_sensitive: false}, format: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
   # validates :role, presence: true, inclusion: {in: 0...@@roles.size}
   validates :role, presence: true #, inclusion: {in: 0...Roles.size}
   # validates :email, presence: true, uniqueness: {case_sensitive: false}
@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   # before_validation :set_default_role
 
-  scope :ordering,->{order(:name)}
+  scope :ordering,->{product_order(:name)}
 
 
   def is_admin?

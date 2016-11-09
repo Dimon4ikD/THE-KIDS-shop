@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 wb.add_worksheet(name: "Products") do |sheet|
-  @products.each do |product|
-    sheet.add_row [product.name, product.price]
+  Product.order(:name).each do |prod|
+    sheet.add_row [prod.name, prod.price, prod.amount, prod.description, prod.catalog.try(:id)]
   end
 end

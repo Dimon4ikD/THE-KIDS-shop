@@ -13,31 +13,52 @@
     =favicon_link_tag 'apple-icon.png', rel: 'apple-touch-icon'
 
   %body
+    -#=image_tag ("back_up.png")#,src: root_path #, height:"165", style: "display: block; margin: auto; text_align:center;"
     =render 'application/navbar_top'
-    -if @current_user.try(:is_admin?)
-      #wrapper
-        =render 'application/sidebar'
-        #page-content-wrapper
-          .container-fluid
-            %span.hidden-print#sidebar-toggle
-              = link_to "#wrapper", class: 'sidebar-toggle' do
-                = fa_icon('ellipsis-v')
-            =render 'flash_messages'
-            -if content_for? :breadcrumb
-              =yield :breadcrumb
-            -if content_for? :error_messages
-              =yield :error_messages
-            = yield
-    -else
-      #wrapper
-        =render 'application/sidebar'
-        #page-content-wrapper
+
+    #wrapper
+      =render 'application/sidebar'
+      %aside.hidden-print#sidebar-toggle
+        = link_to "#wrapper", class: 'sidebar-toggle' do
+          -#= fa_icon('fa-pulse')
+          = fa_icon('ellipsis-v')
+      #page-content-wrapper
+        .container-fluid
+          %form.navbar-form{:action => search_products_path, :method => :get}
+            .input-group
+              %input#query.form-control{:name => "search", :placeholder => "Введите название товара или производителя", :type => "text", :value => ""}
+                .input-group-btn
+                  %button.noshadow.btn.btn-primary.noshadow{:method => :submit}
+                    -#%span.fa.fa-spinner.fa-pulse
+                    %span.glyphicon.glyphicon-search
+
+
+                    -#kind of product -> product
+                    -#= form_tag search_path, method: 'get' do
+                    -#  %ul
+                    -#    - @products.each do |product|
+                    -#      %li.checkboxtext
+                    -#        = product.name
+
+
+
+
+          -#%p
+          -#=render 'banners/wheel_ui'
+          -#-#=render 'banners/wheel'
+          %p
+
+          -#%span.hidden-print#sidebar-toggle
+          -#  = link_to "#wrapper", class: 'sidebar-toggle' do
+          -#    -#= fa_icon('fa-pulse')
+          -#    = fa_icon('ellipsis-v')
           =render 'flash_messages'
           -if content_for? :breadcrumb
             =yield :breadcrumb
           -if content_for? :error_messages
             =yield :error_messages
           = yield
+
   .modal.fade#loader{tabindex: -1, role: 'dialog', 'aria-labelledby' => 'myModalLabel'}
     .modal-dialog.mymodal{role: 'document'}
       =image_tag 'gears.gif'

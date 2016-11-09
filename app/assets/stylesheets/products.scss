@@ -1,3 +1,16 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.col-sm(@columns; @gutter: @grid-gutter-width)
+  position: left
+  // Prevent columns from collapsing when empty
+  min-height: 1px
+  // Inner gutter via padding
+  padding-left:  (@gutter / 2)
+  padding-right: (@gutter / 2)
+
+  // Calculate width based on number of columns available
+  @media (min-width: @grid-float-breakpoint)
+    float: left
+    width: percentage((@columns / @grid-columns))
+

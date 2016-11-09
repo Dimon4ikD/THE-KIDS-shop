@@ -1,0 +1,42 @@
+%p
+.page-header
+  %h1 Товары
+
+.row
+  .list-group
+    .col-sm-12
+      .list-group-item
+        .row
+          .col-xs-2.col-sm-3.col-lg-3
+            Сортировать по
+            .dropdown
+              =link_to ?#, class: 'dropdown-toggle', data: {toggle: 'dropdown'} do
+                Названию
+                =fa_icon 'angle-down'
+              %ul.dropdown-menu
+                %li=link_to 'Выход', logout_path
+          -#.col-sm-4.pull-right
+          -#  Вид каталога
+          -#  .col-sm-2.pull-right
+          -#    3
+          -#  .col-sm-2.pull-right
+          -#    2
+          -#  .col-sm-2.pull-right
+          -#    1
+          .col-xs-3.col-sm-3.pull-right
+            Вид каталога
+            .btn-group.pull-right
+              = link_to '', products_path(typee: 3), class: "btn btn-deafult fa fa-bars"
+              = link_to '', products_path(typee: 2), class: "btn btn-deafult fa fa-list"
+              = link_to '', products_path(typee: 1), class: "btn btn-deafult fa fa-th"
+
+
+=breadcrumb_tag do
+  %li
+    =link_to ("Товары"), products_path
+-if @type==1
+  =render 'prods_old'
+-elsif @type==2
+  =render 'prods'
+-else @type==3
+  =render 'prods_2'

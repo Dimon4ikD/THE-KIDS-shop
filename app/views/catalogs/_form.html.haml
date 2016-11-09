@@ -6,14 +6,38 @@
         - @catalog.errors.full_messages.each do |msg|
           %li= msg
 
+
+
   .field
-    = f.label :name
-    = f.text_field :name
+    = f.label "Название"
+    %br/
+    = f.text_area :name, class: 'form-control'
+  -#
+  -#.field
+  -#  = f.label "HTML"
+  -#  %br/
+  -#  = f.text_area :HyTML, class: 'form-control'
+
+
   .field
-    = f.label :HyTML
-    = f.text_field :HyTML
-  .field
-    = f.label :description
-    = f.text_area :description
-  .actions
-    = f.submit 'Save'
+    = f.label "Описание"
+    %br/
+    = f.text_area :description, class: 'form-control'
+  %p
+
+
+  %textarea#edit{:name => "content"}
+    =@catalog.HyTML
+
+
+
+  %link{:href => "../css/froala_style.min.css", :rel => "stylesheet", :type => "text/css"}/
+
+  .fr-view
+    Here comes the HTML edited with the Froala rich text editor.
+
+
+
+
+
+  .actions=f.submit 'Сохранить', class: "btn btn-primary"

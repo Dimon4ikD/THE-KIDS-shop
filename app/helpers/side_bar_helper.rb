@@ -7,35 +7,40 @@ module SideBarHelper
       :controller => :welcome,
       :action => :index
     }
-    result << {
-      :name => 'Администрирование',
-      :icon => 'users',
-      :children => [
-      {:name => 'Пользователи',
-       :controller => :users, :action => :index,
-       :icon => 'file-text-o',
-       :class => 'long'},
-      {:name => 'Добавление',
-       :controller => :users, :action => :new,
-       :icon => 'user-plus'},
-      {:name => 'Наполнение',
-       :controller => :catalogs, :action => :index,
-       :icon => 'file-text-o'},
-      {:name => 'База данных',
-       :controller => :dabase, :action => :dabase,
-       :icon => 'database'}
-    ]}
+    if @current_user.try(:is_admin?)
+      result << {
+        :name => 'Администрирование',
+        :icon => 'users',
+        :children => [
+        {:name => 'Пользователи',
+         :controller => :users, :action => :index,
+         :icon => 'file-text-o',
+         :class => 'long'},
+        {:name => 'Добавление',
+         :controller => :users, :action => :new,
+         :icon => 'user-plus'},
+        {:name => 'Наполнение',
+         :controller => :catalogs, :action => :index,
+         :icon => 'file-text-o'},
+        {:name => 'База данных',
+         :controller => :dabase, :action => :dabase,
+         :icon => 'database'},
+        {:name => 'Баннеры',
+         :controller => :banners, :action => :index,
+         :icon => 'photo'}
+      ]}
+    end
 
     Section.order(:name).all.each do |s|
       item = {
       :name => s.name,
-      :icon => 'users',
+      :icon => 'circle',
       :children => []}
       s.catalogs.order(:name).each do |c|
           subitem = {:name => c.name,
           :controller => 'catalogs',
           :action => 'show',
-          :icon => 'users',
+          :icon => 'circle',
           :params => {'id' => c.id}}
           item[:children] << subitem
         end
@@ -55,6 +60,27 @@ module SideBarHelper
        :icon => 'search',
        :class => 'long'}
     ]}
+    result
+
+    result << {
+      :name => 'Контакты',
+      :icon => 'user',
+      :children => [
+        {:name => 'Ссылка товаров',
+         :controller => :welcome, :action => :index,
+         :icon => 'binoculars'}
+      ]}
+    result
+
+    result << {
+      :name => 'Видео',
+      :icon => 'video-camera',
+      :children => [
+        {:name => 'Ссылка товаров',
+         :controller => :welcome, :action => :index,
+         :icon => 'binoculars'}
+
+      ]}
     result
   end
   

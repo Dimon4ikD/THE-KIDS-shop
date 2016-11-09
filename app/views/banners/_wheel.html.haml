@@ -1,0 +1,78 @@
+-#-@real_banners=Banner.where(frequency!=0)
+-benners = Banner.where("frequency != ?", 0).count
+-if benners>0
+  .col-sm-13.absolute
+    .jumbotron-lg
+      #carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+        / Indicators
+
+        %ol.carousel-indicators
+          %li.active{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+          -i=1
+          -benners.times do
+
+            %li{"data-slide-to" => "#{i+1}", "data-target" => "#carousel-example-generic"}
+
+
+        / Wrapper for slides
+
+        .carousel-inner{:role => "listbox"}
+          .item.active
+            =image_tag "img_4522.png", class: "img_some", :style => "border: none"
+          -@banners.each do |banner|
+
+            -if banner.can_show? #{:controller => "catalog", :action => "click", :banner => banner.id }, , params: { click: true}
+              .item
+                = link_to banner.catalog(click: true), class: "form-group" do
+                  =image_tag banner.image.url(:medium), class: "img_some", :style => "border: none"
+                  -#-if banner.toogled
+                  -#  -banner.decrease_f
+                  .carousel-caption
+
+        / Controls
+        %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel-example-generic", :role => "button"}
+          %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+          %span.sr-only Назад
+        %a.right.carousel-control{"data-slide" => "next", :href => "#carousel-example-generic", :role => "button"}
+          %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+          %span.sr-only Вперед
+
+
+
+-else
+  .col-md-12
+    %b
+
+-#-@banners.count
+
+-#
+-#
+-##carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+-#  / Indicators
+-#  %ol.carousel-indicators
+-#    %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
+-#    %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+-#    %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
+-#  / Wrapper for slides
+-#  .carousel-inner{:role => "listbox"}
+-#    .item.active
+-#      =image_tag ("banner1.jpg"), :height => "513", :width => "100"
+-#      .carousel-caption
+-#        =link_to 'Показать', @banner
+-#    .item
+-#      =image_tag ("banner4.jpg"), :width => "1300"
+-#      .carousel-caption
+-#    .item
+-#      =image_tag ("banner5.jpg"), :width => "1300", align: "center"
+-#      .carousel-caption
+-#
+-#
+-#
+-#
+-#  / Controls
+-#  %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel-example-generic", :role => "button"}
+-#    %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+-#    %span.sr-only Назад
+-#  %a.right.carousel-control{"data-slide" => "next", :href => "#carousel-example-generic", :role => "button"}
+-#    %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+-#    %span.sr-only Вперед

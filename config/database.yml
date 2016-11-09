@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: kidsshop_development
+  database: medshop_development
   username: base
   password: base
 
@@ -59,7 +59,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: kidsshop_test
+  database: medshop_test
   username: base
   password: base
 
@@ -84,6 +84,6 @@ test:
 #
 production:
   <<: *default
-  database: kidsshop_production
-  username: kidsshop
-  password: <%= ENV['KIDSHOP_DATABASE_PASSWORD'] %>
+  database: medshop_production
+  username: medshop
+  password: <%= ENV['MEDSHOP_DATABASE_PASSWORD'] %>

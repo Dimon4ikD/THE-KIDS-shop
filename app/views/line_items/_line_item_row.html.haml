@@ -1,0 +1,11 @@
+.row
+  .col-md-3
+    =@line_item.product.name
+  .col-md-3
+    =link_to '', plus_minus_line_item_path(id: @line_item.id ,op: :minus), class:"btn btn-mini glyphicon glyphicon-minus", id: "li_minus#{@line_item.id}", remote: true
+    =@line_item.quantity
+    =link_to('', plus_minus_line_item_path(id: @line_item.id,op: :plus), class:"btn btn-mini glyphicon glyphicon-plus", id: "li_plus#{@line_item.id}", remote: true)
+  .col-md-3
+    =@line_item.price
+  .col-md-3
+    =@line_item.quantity*@line_item.price

@@ -1,0 +1,23 @@
+
+%h1 Корзина
+
+
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @carts.each do |cart|
+      %tr
+
+        %td= link_to 'Показать', cart, class: "btn btn-primary fa fa-connectdevelop"
+        %td= link_to 'Редактировать', edit_cart_path(cart), class: "btn btn-primary fa fa-connectdevelop"
+        %td= link_to 'Удалить', cart, :method => :delete, :data => { :confirm => 'Вы уверены?' }, class: "btn btn-primary fa fa-connectdevelop"
+
+%br
+
+= link_to 'Новая корзина', new_cart_path, class: "btn btn-primary fa fa-plus"

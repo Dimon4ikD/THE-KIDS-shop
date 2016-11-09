@@ -3,8 +3,14 @@ $navbar-default-bg: #fff
 $navbar-default-link-color: #333
 $navbar-margin-bottom: 0
 //$navbar-inverse-bg: #438EB9 // #01579b
-$navbar-inverse-bg: #01579b //#438EB9 // #01579b
-$navbar-inverse-link-color: lighten(#000, 90%)
+//$navbar-inverse-bg: #4f6f96
+$navbar-inverse-bg: #4fa5ee
+//$navbar-bg-image: "app/assets/images/fon_menu.jpg"
+
+
+$button-show: #438EB9
+//$navbar-inverse-bg: #01579b //#438EB9 // #01579b
+$navbar-inverse-link-color: lighten(#000, 89%)
 $navbar-inverse-link-hover-color: #fff
 $navbar-inverse-link-active-color: $navbar-inverse-link-color
 $navbar-inverse-link-hover-bg: darken($navbar-inverse-bg, 10%)
@@ -19,14 +25,23 @@ $dropdown-link-active-bg: $navbar-inverse-bg
 $dropdown-fallback-border: $navbar-inverse-bg
 
 $navbar-height: 61px
-//$navbar-radius: 5%
+$navbar-radius: 1%
 $font-size-base: 14px
-$border-radius-base: 1%
-$border-radius-small: 1%
-$border-radius-large: 1%
+$font-size-hover: 15px
+//$border-radius-base: 1%
+//$border-radius-small: 1%
+//$border-radius-large: 1%
 $breadcrumb-padding-horizontal: 0
+//$breadcrumb-font-size: 19px
 
-$breadcrumb-separator: '❮'
+//$breadcrumb-separator: '❮'
+$breadcrumb-separator: '→'
+.breadcrumb:after
+  content: "↓"
+  color: #aaa
+
+//$breadcrumb-separator: '❯'
+//$breadcrumb-separator: '😋'
 $breadcrumb-bg: $body-bg
 
 $dark-blue: darken($navbar-inverse-bg, 10%)
@@ -40,7 +55,7 @@ $nav-tabs-active-link-hover-border-color: $dark-blue
 $btn-default-bg: #c2c2c2
 //$brand-primary: #1A3063 // #1ab394
 //$brand-success: #1c84c6
-//$brand-info: #23c6c8
+$brand-info: #23c6c8
 //$brand-warning: #f8ac59
 //$brand-danger: #ed5565
 
@@ -50,12 +65,20 @@ $brand-purple: #727cb6
 $text-muted: #999
 $text-yellow: #EEEE00
 
-@import bootstrap-sprockets
-@import bootstrap
+@import "bootstrap-sprockets"
+@import "bootstrap"
+.alert-notice
+  @extend .alert-success
 
-@import font-awesome
+@import "font-awesome"
+.field_with_errors
+  @extend .has-error
+@import "uikit"
 
-@import fonts
+
+
+@import fonts.sass
+//@import fonts.css
 
 //@import buttons
 @import sidebar
@@ -63,3 +86,4 @@ $text-yellow: #EEEE00
 @import navbar
 @import welcome
 @import catalogs
+@import animate

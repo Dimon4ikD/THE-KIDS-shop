@@ -1,0 +1,160 @@
+-#%h1 Баннеры
+-#
+-#%table
+-#  %thead
+-#    %tr
+-#      %th Фильм
+-#      %th Слайд
+-#      %th Частота
+-#      %th
+-#      %th
+-#      %th
+-#
+-#  %tbody
+-#    - @banners.each do |banner|
+-#      %tr
+-#        %td= banner.film.name
+-#        %td
+-#          .media
+-#            -if banner.image?
+-#              .media-left=image_tag banner.image.url(:thumb), class: 'media-object'
+-#            -else "Изображение отсутствует"
+-#        %td= banner.frequency
+-#        %td= link_to 'Показать', banner
+-#        %td= link_to 'Изменить', edit_banner_path(banner)
+-#        %td= link_to 'Удалить', banner, :method => :delete, :data => { :confirm => 'Are you sure?' }
+-#
+-#%br
+-#
+-#.page-header
+-#  %h1 Баннеры
+-#-if Banner.manage?(@current_user)
+-#  .btn-toolbar
+-#    =link_to new_banner_path, class: 'btn btn-primary' do
+-#      =fa_icon 'plus'
+-#      Добавить
+-#.list-group
+-#  =link_to @banner, class: 'list-group-item' do
+-#    .media
+-#      -if @banners.image?
+-#        .media-left=image_tag @banner.image.url(:thumb), class: 'media-object'
+-#      .media-body
+-#        %h4.media-heading=@banner.film.name
+-#
+-#
+-#
+-#=link_to person, class: 'list-group-item' do
+-#  .media
+-#    -if person.avatar?
+-#      .media-left=image_tag person.avatar.url(:thumb), alt: person.name, class: 'media-object'
+-#    .media-body
+-#      %h4.media-heading=person.name
+-#
+-#
+
+
+
+.page-header
+  %h1 Баннеры
+-if Banner.manage?(@current_user)
+  .btn-toolbar
+    =link_to new_banner_path, class: 'btn btn-primary' do
+      =fa_icon 'plus'
+      Добавить
+.list-group=render @banners
+-#=paginate @banners
+
+
+-#
+-#=paginate @banner
+
+
+
+
+
+
+
+
+-#
+-#:css
+-#  div#rotator {position:relative; height:150px; margin-left: 15px;}
+-#  div#rotator ul li {float:left; position:absolute; list-style: none;}
+-#  div#rotator ul li.show {z-index:100;}
+-#
+-#-#=image_tag ("banner1.jpg")
+-##rotator
+-#  %ul
+-#    %li.show
+-#      %a{:href => "http://google.ru/"}
+-#        =image_tag ("banner1.jpg"), :height => "313", :width => "500", :alt => "pic1"
+-#    %li
+-#      %a{:href => "http://yandex.ru/"}
+-#        =image_tag ("banner2.jpg"), :height => "313", :width => "500", :alt => "pic2"
+-#    %li
+-#      %a{:href => "http://nigma.ru/"}
+-#        =image_tag ("banner3.jpg"), :height => "313", :width => "500", :alt => "pic3"
+
+
+
+
+
+-#
+-#
+-########
+-##############
+-#the best way!-------------   ###   ###   ###
+
+-##carousel-example-generic.carousel.slide{"data-ride" => "carousel"}
+-#  / Indicators
+-#  %ol.carousel-indicators
+-#    %li.active{"data-slide-to" => "0", "data-target" => "#carousel-example-generic"}
+-#    %li{"data-slide-to" => "1", "data-target" => "#carousel-example-generic"}
+-#    %li{"data-slide-to" => "2", "data-target" => "#carousel-example-generic"}
+-#  / Wrapper for slides
+-#  .carousel-inner{:role => "listbox"}
+-#    .item.active
+-#      =image_tag ("banner1.jpg"), :height => "513", :width => "100"
+-#      .carousel-caption
+-#        =link_to 'Показать', @banner
+-#    .item
+-#      =image_tag ("banner4.jpg"), :width => "1300"
+-#      .carousel-caption
+-#    .item
+-#      =image_tag ("banner5.jpg"), :width => "1300", align: "center"
+-#      .carousel-caption
+-#
+-#  / Controls
+-#  %a.left.carousel-control{"data-slide" => "prev", :href => "#carousel-example-generic", :role => "button"}
+-#    %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
+-#    %span.sr-only Назад
+-#  %a.right.carousel-control{"data-slide" => "next", :href => "#carousel-example-generic", :role => "button"}
+-#    %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
+-#    %span.sr-only Вперед
+
+-#the best way!-------------   ###   ###   ###
+-##############
+-########
+-#
+-#
+
+
+
+
+-#
+-#%div
+-#  =image_tag ("banner1.jpg"), :alt => "Book", :height => "370", :width => "250", :style => "position: absolute;", :id => "image_1"
+-#  =image_tag ("banner2.jpg"), :height => "370", :width => "250",:style => "opacity: 0; filter: alpha(opacity=0); position: absolute;", :id => "image_2"
+-#  =image_tag ("banner3.jpg"), :height => "370", :width => "250",:style => "opacity: 0; filter: alpha(opacity=0); position: absolute;", :id => "image_3"
+
+
+%p
+%p
+
+-#
+-#-if Banner.manage?(@current_user)
+-#  .btn-toolbar
+-#    =link_to new_banner_path,class: 'btn btn-primary' do
+-#      =fa_icon 'plus'
+-#      Добавить
+-#
+-#      -#= link_to 'Новый Баннер', new_banner_path

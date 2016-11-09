@@ -1,25 +1,66 @@
+-#= form_for @product do |f|
+-#  - if @product.errors.any?
+-#    #error_explanation
+-#      %h2= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
+-#      %ul
+-#        - @product.errors.full_messages.each do |msg|
+-#          %li= msg
+-#
+-#  .field
+-#    = f.label :name
+-#    = f.text_field :name
+-#  .field
+-#    = f.label :amount
+-#    = f.number_field :amount
+-#  .field
+-#    = f.label :cover
+-#    = f.text_field :cover
+-#  .field
+-#    = f.label :price
+-#    = f.number_field :price
+-#  .field
+-#    = f.label :Catalog
+-#    = f.text_field :Catalog
+-#  .actions
+-#    = f.submit 'Save'
+
 = form_for @product do |f|
   - if @product.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@product.errors.count, "error")} prohibited this product from being saved:"
+      %h2
+        = pluralize(@product.errors.count, "error")
+        prohibited this product from being saved:
       %ul
-        - @product.errors.full_messages.each do |msg|
-          %li= msg
-
+        - @product.errors.full_messages.each do |message|
+          %li= message
   .field
     = f.label :name
-    = f.text_field :name
+    %br/
+    = f.text_field :name, class: 'form-control'
+
+  -#=f.text_field :author_id, data: {tokeninput:  authors_path(format: :json),
+  -#    pre: [@product.author].compact.to_json, limit: 1}
   .field
-    = f.label :amount
-    = f.number_field :amount
+    = f.label "Цена"
+    %br/
+    = f.number_field :price, class: 'form-control'
   .field
-    = f.label :cover
-    = f.text_field :cover
-  .field
-    = f.label :price
-    = f.number_field :price
-  .field
-    = f.label :Catalog
-    = f.text_field :Catalog
-  .actions
-    = f.submit 'Save'
+    = f.label "Описание"
+    %br/
+    = f.text_area :description, class: 'form-control'
+  -#-if !@product.image.blank?
+  -#  = image_tag @product.cover.image.url(:medium),size:"173x232", alt: @product.name, class: 'img-responsive'
+
+  -#.field
+  -#  = f.label :image
+  -#  %br/
+  -#  = f.file_field :image
+  -#.field
+  -#  = f.label :document
+  -#  %br/
+  -#  = f.file_field :document
+  %p
+
+  .actions=f.submit 'Сохранить', class: "btn btn-primary"
+%p
+
